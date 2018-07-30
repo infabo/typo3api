@@ -3,6 +3,9 @@
 namespace Typo3Api\Tca\Field;
 
 
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
 use Typo3Api\Builder\Context\TableBuilderContext;
 
 class InlineRelationFieldTest extends AbstractFieldTest
@@ -24,16 +27,21 @@ class InlineRelationFieldTest extends AbstractFieldTest
 
     protected function assertBasicCtrlChange(AbstractField $field)
     {
-        $GLOBALS['TCA']['tx_typo3api_foreign_table']['ctrl'] = [];
+        $GLOBALS['TCA'][$field->getOption('foreign_table')]['ctrl'] = [];
         $testTable = new TableBuilderContext('stub_table', '1');
 
         $ctrl = [];
         $field->modifyCtrl($ctrl, $testTable);
+
+        list($tca) = GeneralUtility::makeInstance(Dispatcher::class)->dispatch(ExtensionManagementUtility::class, 'tcaIsBeingBuilt', [$GLOBALS['TCA']]);
+        $this->assertNotEquals($GLOBALS['TCA'], $tca);
+        $GLOBALS['TCA'] = $tca;
+
         unset($ctrl['EXT']); // remove extension
         $this->assertEmpty($ctrl, "No modification to ctrl is done");
         $this->assertEquals(
             ['hideTable' => true],
-            $GLOBALS['TCA']['tx_typo3api_foreign_table']['ctrl'],
+            $GLOBALS['TCA'][$field->getOption('foreign_table')]['ctrl'],
             "Hide table"
         );
     }
@@ -58,40 +66,43 @@ class InlineRelationFieldTest extends AbstractFieldTest
     {
         $testTable = new TableBuilderContext('stub_table', '1');
 
+        $GLOBALS['TCA'][$testTable->getTableName()]['columns'] = $field->getColumns($testTable);
+        list($tca) = GeneralUtility::makeInstance(Dispatcher::class)->dispatch(ExtensionManagementUtility::class, 'tcaIsBeingBuilt', [$GLOBALS['TCA']]);
+        $this->assertNotEquals($GLOBALS['TCA'], $tca);
+        $GLOBALS['TCA'] = $tca;
+
         $this->assertEquals([
-            $field->getName() => [
-                'label' => $field->getOption('label'),
-                'config' => [
-                    'type' => 'inline',
-                    'foreign_table' => 'tx_typo3api_foreign_table',
-                    'foreign_field' => 'parent_uid',
-                    'foreign_sortby' => null,
-                    'minitems' => 0,
-                    'maxitems' => 100,
-                    'behaviour' => [
-                        'enableCascadingDelete' => true,
-                        'localizeChildrenAtParentLocalization' => false,
-                    ],
-                    'appearance' => [
-                        'collapseAll' => 1,
-                        'useSortable' => false,
-                        'showPossibleLocalizationRecords' => false,
-                        'showRemovedLocalizationRecords' => false,
-                        'showAllLocalizationLink' => false,
-                        'showSynchronizationLink' => false,
-                        'enabledControls' => [
-                            'info' => true,
-                            'new' => true,
-                            'dragdrop' => false,
-                            'sort' => false,
-                            'hide' => false,
-                            'delete' => true,
-                            'localize' => false,
-                        ],
+            'label' => $field->getOption('label'),
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_typo3api_foreign_table',
+                'foreign_field' => 'parent_uid',
+                'foreign_sortby' => null,
+                'minitems' => 0,
+                'maxitems' => 100,
+                'behaviour' => [
+                    'enableCascadingDelete' => true,
+                    'localizeChildrenAtParentLocalization' => false,
+                ],
+                'appearance' => [
+                    'collapseAll' => 1,
+                    'useSortable' => false,
+                    'showPossibleLocalizationRecords' => false,
+                    'showRemovedLocalizationRecords' => false,
+                    'showAllLocalizationLink' => false,
+                    'showSynchronizationLink' => false,
+                    'enabledControls' => [
+                        'info' => true,
+                        'new' => true,
+                        'dragdrop' => false,
+                        'sort' => false,
+                        'hide' => false,
+                        'delete' => true,
+                        'localize' => false,
                     ],
                 ],
-            ]
-        ], $field->getColumns($testTable));
+            ],
+        ], $tca[$testTable->getTableName()]['columns'][$field->getName()]);
     }
 
     /**

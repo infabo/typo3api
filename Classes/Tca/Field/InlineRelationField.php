@@ -6,6 +6,9 @@ namespace Typo3Api\Tca\Field;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
 use Typo3Api\Builder\Context\TableBuilderContext;
 use Typo3Api\Builder\Context\TcaBuilderContext;
 use Typo3Api\Builder\TableBuilder;
@@ -71,78 +74,102 @@ class InlineRelationField extends AbstractField
 
     public function modifyCtrl(array &$ctrl, TcaBuilderContext $tcaBuilder)
     {
-        parent::modifyCtrl($ctrl, $tcaBuilder);
-
-        $foreignTable = $this->getOption('foreign_table');
-        if (!isset($GLOBALS['TCA'][$foreignTable])) {
-            $msg = "Configure $foreignTable before adding it in the irre configuraiton of $tcaBuilder.";
-            $msg .= "\nThis can also be a loading order issue of tca files. You can try to put the inline relation into TCA/Overrides.";
-            $msg .= "\nIf you just need the foreign table in this relation, you might also consider configuring it inline here.";
+        if (!$tcaBuilder instanceof TableBuilderContext) {
+            $type = is_object($tcaBuilder) ? get_class($tcaBuilder) : gettype($tcaBuilder);
+            $msg = "Inline Relation is only supported on database tables";
+            $msg .= " so the context must be a " . TableBuilderContext::class . ", got $type";
             throw new \RuntimeException($msg);
         }
 
-        $foreignTableDefinition = $GLOBALS['TCA'][$foreignTable];
-        $sortby = @$foreignTableDefinition['ctrl']['sortby'] ?: @$foreignTableDefinition['ctrl']['_sortby'];
+        parent::modifyCtrl($ctrl, $tcaBuilder);
 
         if ($this->getOption('foreignTakeover')) {
-            // the doc states that sortby should be disabled if the table is exclusive for this relation
-            // https://docs.typo3.org/typo3cms/TCAReference/8-dev/ColumnsConfig/Type/Inline.html#foreign-sortby
-            if ($sortby) {
-                $GLOBALS['TCA'][$foreignTable]['ctrl']['sortby'] = null;
-                $GLOBALS['TCA'][$foreignTable]['ctrl']['_sortby'] = $sortby;
-            }
+            $dispatcher = GeneralUtility::makeInstance(Dispatcher::class);
+            $dispatcher->connect(ExtensionManagementUtility::class, 'tcaIsBeingBuilt', function ($tca) use ($tcaBuilder) {
+                $foreignTable = $this->getOption('foreign_table');
+                if (!isset($tca[$foreignTable])) {
+                    throw new \RuntimeException("$foreignTable not defined. Used in inline relation for $tcaBuilder");
+                }
 
-            // ensure only this relation sees the other table
-            $GLOBALS['TCA'][$foreignTable]['ctrl']['hideTable'] = true;
+                $sortby = @$tca[$foreignTable]['ctrl']['sortby'] ?: @$tca[$foreignTable]['ctrl']['_sortby'];
 
-            // since this table can't normally be created anymore, remove creation restrictions
-            // ExtensionManagementUtility::allowTableOnStandardPages($foreignTable);
-            $GLOBALS['TCA']['pages']['ctrl']['EXT']['typo3api']['allow_tables'][] = $foreignTable;
+                // the doc states that sortby should be disabled if the table is exclusive for this relation
+                // https://docs.typo3.org/typo3cms/TCAReference/8.7/ColumnsConfig/Type/Inline.html#foreign-sortby
+                if ($sortby) {
+                    $tca[$foreignTable]['ctrl']['sortby'] = null;
+                    $tca[$foreignTable]['ctrl']['_sortby'] = $sortby;
+                }
+
+                // ensure only this relation sees the other table
+                $tca[$foreignTable]['ctrl']['hideTable'] = true;
+
+                // since this table can't normally be created anymore, remove creation restrictions
+                // ExtensionManagementUtility::allowTableOnStandardPages($foreignTable);
+                $tca['pages']['ctrl']['EXT']['typo3api']['allow_tables'][] = $foreignTable;
+
+                return [$tca];
+            });
         }
     }
 
     public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder)
     {
-        $foreignTable = $this->getOption('foreign_table');
-        if (!isset($GLOBALS['TCA'][$foreignTable])) {
-            throw new \RuntimeException("Configure $foreignTable before adding it in the irre configuraiton of $tcaBuilder");
+        if (!$tcaBuilder instanceof TableBuilderContext) {
+            $type = is_object($tcaBuilder) ? get_class($tcaBuilder) : gettype($tcaBuilder);
+            $msg = "Inline Relation is only supported on database tables";
+            $msg .= " so the context must be a " . TableBuilderContext::class . ", got $type";
+            throw new \RuntimeException($msg);
         }
 
-        $foreignTableDefinition = $GLOBALS['TCA'][$foreignTable];
-        $sortby = @$foreignTableDefinition['ctrl']['sortby'] ?: @$foreignTableDefinition['ctrl']['_sortby'];
-        $canBeSorted = (bool)$sortby;
-        $canLocalize = (bool)@$foreignTableDefinition['ctrl']['languageField'];
-        $canHide = (bool)@$foreignTableDefinition['columns']['hidden'];
-
-        return [
+        $column = [
             'type' => 'inline',
             'foreign_table' => $this->getOption('foreign_table'),
             'foreign_field' => $this->getOption('foreign_field'),
-            'foreign_sortby' => $sortby,
             'minitems' => $this->getOption('minitems'),
             'maxitems' => $this->getOption('maxitems'),
             'behaviour' => [
                 'enableCascadingDelete' => $this->getOption('foreignTakeover'),
-                'localizeChildrenAtParentLocalization' => $canLocalize
             ],
             'appearance' => [
                 'collapseAll' => $this->getOption('collapseAll') ? 1 : 0,
-                'useSortable' => $canBeSorted,
-                'showPossibleLocalizationRecords' => $canLocalize,
-                'showRemovedLocalizationRecords' => $canLocalize,
-                'showAllLocalizationLink' => $canLocalize,
-                'showSynchronizationLink' => $canLocalize, // potentially dangerous...
                 'enabledControls' => [
-                    'info' => TRUE,
-                    'new' => TRUE,
-                    'dragdrop' => $canBeSorted,
-                    'sort' => $canBeSorted,
-                    'hide' => $canHide,
-                    'delete' => TRUE,
-                    'localize' => $canLocalize,
+                    'info' => true,
+                    'new' => true,
+                    'delete' => true,
                 ],
             ],
         ];
+
+        $dispatcher = GeneralUtility::makeInstance(Dispatcher::class);
+        $dispatcher->connect(ExtensionManagementUtility::class, 'tcaIsBeingBuilt', function ($tca) use ($tcaBuilder) {
+            $foreignTable = $this->getOption('foreign_table');
+            if (!isset($tca[$foreignTable])) {
+                throw new \RuntimeException("$foreignTable not defined. Used in inline relation for $tcaBuilder");
+            }
+
+            $foreignTableDefinition = $tca[$foreignTable];
+            $sortby = @$foreignTableDefinition['ctrl']['sortby'] ?: @$foreignTableDefinition['ctrl']['_sortby'];
+            $canBeSorted = (bool)$sortby;
+            $canLocalize = (bool)@$foreignTableDefinition['ctrl']['languageField'];
+            $canHide = (bool)@$foreignTableDefinition['columns']['hidden'];
+
+            $column =& $tca[$tcaBuilder->getTableName()]['columns'][$this->getName()];
+            $column['config']['foreign_sortby'] = $sortby;
+            $column['config']['behaviour']['localizeChildrenAtParentLocalization'] = $canLocalize;
+            $column['config']['appearance']['useSortable'] = $canBeSorted;
+            $column['config']['appearance']['showPossibleLocalizationRecords'] = $canLocalize;
+            $column['config']['appearance']['showRemovedLocalizationRecords'] = $canLocalize;
+            $column['config']['appearance']['showAllLocalizationLink'] = $canLocalize;
+            $column['config']['appearance']['showSynchronizationLink'] = $canLocalize;
+            $column['config']['appearance']['enabledControls']['dragdrop'] = $canBeSorted;
+            $column['config']['appearance']['enabledControls']['sort'] = $canBeSorted;
+            $column['config']['appearance']['enabledControls']['hide'] = $canHide;
+            $column['config']['appearance']['enabledControls']['localize'] = $canLocalize;
+
+            return [$tca];
+        });
+
+        return $column;
     }
 
     public function getColumns(TcaBuilderContext $tcaBuilder): array
@@ -167,7 +194,7 @@ class InlineRelationField extends AbstractField
         $foreignField = addslashes($this->getOption('foreign_field'));
         $tableDefinitions[$this->getOption('foreign_table')] = [
             "`$foreignField` INT(11) DEFAULT '0' NOT NULL",
-            "KEY `$foreignField`(`$foreignField`)"
+            "KEY `$foreignField`(`$foreignField`)",
         ];
 
         return $tableDefinitions;
