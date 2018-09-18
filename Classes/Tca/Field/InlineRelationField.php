@@ -192,10 +192,15 @@ class InlineRelationField extends AbstractField
         // define the field on the other side
         // TODO somewhere it should be checked if this field is already defined
         $foreignField = addslashes($this->getOption('foreign_field'));
-        $tableDefinitions[$this->getOption('foreign_table')] = [
-            "`$foreignField` INT(11) DEFAULT '0' NOT NULL",
-            "KEY `$foreignField`(`$foreignField`)",
-        ];
+        $foreignTable = $this->getOption('foreign_table');
+
+        // for self referencing relations the foreign table key might already exist, otherwise create it
+        if (!array_key_exists($foreignTable, $tableDefinitions)) {
+            $tableDefinitions[$foreignTable] = [];
+        }
+
+        $tableDefinitions[$foreignTable][] = "`$foreignField` INT(11) DEFAULT '0' NOT NULL";
+        $tableDefinitions[$foreignTable][] = "KEY `$foreignField`(`$foreignField`)";
 
         return $tableDefinitions;
     }
