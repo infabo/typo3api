@@ -116,7 +116,9 @@ class MultiSelectRelationField extends AbstractField
 
             // every table should have a primary key
             // todo find reference for this
-            "PRIMARY KEY (uid_local, uid_foreign)",
+            // by defining the foreign key first, mysql can use this key for reverse relations
+            // while the local key (below) can be used for the correct direction + potential sorting
+            "PRIMARY KEY (uid_foreign, uid_local)",
 
             // use index for access
             // also index the sorting field
