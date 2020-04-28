@@ -30,12 +30,12 @@
         "symfony/intl": ">= 2.3, < 5.0",
         "symfony/options-resolver": ">= 2.6, < 5.0",
         "symfony/polyfill-mbstring": "^1.2",
-        "typo3/cms-backend": "~8.7.8 || ~9.5.0",
-        "typo3/cms-core": "~8.7.8 || ~9.5.0",
-        "typo3/cms-extbase": "~8.7.8 || ~9.5.0",
-        "typo3/cms-frontend": "~8.7.8 || ~9.5.0",
-        "typo3/cms-install": "~8.7.8 || ~9.5.0",
-        "typo3/cms-lang": "~8.7.8 || ~9.5.0"
+        "typo3/cms-backend": "^10.4",
+        "typo3/cms-core": "^10.4",
+        "typo3/cms-extbase": "^10.4",
+        "typo3/cms-frontend": "^10.4",
+        "typo3/cms-install": "^10.4",
+        "typo3/cms-lang": "^10.4"
     },
     "autoload": {
         "psr-4": {
