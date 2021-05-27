@@ -1,25 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: marco
- * Date: 10.06.17
- * Time: 21:03
- */
 
-namespace Typo3Api\Hook;
+declare(strict_types=1);
 
+namespace Typo3Api\EventListener;
 
-use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\CMS\Core\Database\Event\AlterTableDefinitionStatementsEvent;
 
-class SqlSchemaHook implements SingletonInterface
+class SqlSchemaListener
 {
-    /**
-     * The actual hook method.
-     *
-     * @param array $sqlStrings
-     * @return array
-     */
-    public function modifyTablesDefinitionString(array $sqlStrings)
+    public function __invoke(AlterTableDefinitionStatementsEvent $event): void
     {
         $map = [];
 
@@ -40,9 +29,7 @@ class SqlSchemaHook implements SingletonInterface
         }
 
         foreach ($map as $tableName => $definitions) {
-            $sqlStrings[] = "CREATE TABLE `$tableName` (\n" . implode(",\n", $definitions) . "\n);";
+            $event->addSqlData("CREATE TABLE `$tableName` (\n" . implode(",\n", $definitions) . "\n);");
         }
-
-        return [$sqlStrings];
     }
 }
