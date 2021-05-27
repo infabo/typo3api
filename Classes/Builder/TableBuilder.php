@@ -68,19 +68,6 @@ class TableBuilder implements TcaBuilderInterface
     }
 
     /**
-     * @param string $name
-     * @param string $typeName
-     *
-     * @return TableBuilder
-     * @deprecated use #create instead
-     */
-    public static function createFullyNamed(string $name, string $typeName = '1'): TableBuilder
-    {
-        trigger_error("TableBuilder::createFullyNamed is deprecated, use ::create instead", E_USER_DEPRECATED);
-        return static::create($name, $typeName);
-    }
-
-    /**
      * @param TcaConfigurationInterface $configuration
      *
      * @return $this
