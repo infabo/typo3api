@@ -17,4 +17,10 @@ return function (ContainerConfigurator $configurator): void {
             'identifier' => 'typo3api-builder/sql-schema',
             'event' => \TYPO3\CMS\Core\Database\Event\AlterTableDefinitionStatementsEvent::class
         ]);
+
+    $services->set(\Typo3Api\EventListener\RegisterWizard::class)
+        ->tag('event.listener', [
+            'identifier' => 'typo3api-builder/register-wizard',
+            'event' => \TYPO3\CMS\Core\Configuration\Event\AfterTcaCompilationEvent::class
+        ]);
 };
