@@ -42,19 +42,6 @@ class BaseConfiguration implements TcaConfigurationInterface
 
     public function getDbTableDefinitions(TableBuilderContext $tableBuilder): array
     {
-        return [
-            $tableBuilder->getTableName() => [
-                "uid int(11) NOT NULL auto_increment",
-                "PRIMARY KEY (uid)",
-                "pid INT(11) NOT NULL DEFAULT '0'",
-                "INDEX pid (pid)", // i'm not sure if every table should have an index on pid
-
-                "deleted TINYINT(1) DEFAULT '0' NOT NULL",
-                "tstamp INT(11) DEFAULT '0' NOT NULL",
-                "crdate INT(11) DEFAULT '0' NOT NULL",
-                "cruser_id INT(11) DEFAULT '0' NOT NULL",
-                "origUid INT(11) DEFAULT '0' NOT NULL",
-            ]
-        ];
+        return [];
     }
 }

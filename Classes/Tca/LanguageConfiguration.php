@@ -97,10 +97,6 @@ class LanguageConfiguration implements TcaConfigurationInterface, DefaultTabInte
     {
         return [
             $tableBuilder->getTableName() => [
-                "sys_language_uid int(11) DEFAULT '0' NOT NULL",
-                "l10n_source int(11) DEFAULT '0' NOT NULL",
-                "l18n_diffsource mediumtext",
-                "l18n_parent int(11) DEFAULT '0' NOT NULL",
                 "KEY language (l18n_parent, sys_language_uid)",
             ]
         ];
