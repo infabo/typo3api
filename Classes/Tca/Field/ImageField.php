@@ -62,7 +62,7 @@ class ImageField extends FileField
                 foreach ($aspectRatios as $aspectRatio) {
                     if ($aspectRatio === 'NaN') {
                         $allowedAspectRatios['NaN'] = [
-                            'title' => 'LLL:EXT:lang/Resources/Private/Language/locallang_wizards.xlf:imwizard.ratio.free',
+                            'title' => 'LLL:EXT:core/Resources/Private/Language/locallang_wizards.xlf:imwizard.ratio.free',
                             'value' => 0.0
                         ];
                         continue;
