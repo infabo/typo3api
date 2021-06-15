@@ -41,7 +41,7 @@ class CompoundTcaConfiguration implements TcaConfigurationInterface, \IteratorAg
         }
     }
 
-    final public function modifyCtrl(array &$ctrl, TcaBuilderContext $tcaBuilder)
+    final public function modifyCtrl(array &$ctrl, TcaBuilderContext $tcaBuilder): void
     {
         foreach ($this->children as $child) {
             $child->modifyCtrl($ctrl, $tcaBuilder);

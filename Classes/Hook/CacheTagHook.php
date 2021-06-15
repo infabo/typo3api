@@ -13,7 +13,7 @@ class CacheTagHook
      *
      * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheGroupException
      */
-    public function clearCachePostProcess(array $params)
+    public function clearCachePostProcess(array $params): void
     {
         if (!isset($GLOBALS['TCA'][$params['table']]['ctrl']['EXT']['typo3api']['cache_tags'])) {
             return;

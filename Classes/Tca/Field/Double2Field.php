@@ -47,7 +47,7 @@ class Double2Field extends AbstractField
         $resolver->setAllowedTypes('required', 'bool');
     }
 
-    public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder)
+    public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder): array
     {
         return [
             'type' => 'input',

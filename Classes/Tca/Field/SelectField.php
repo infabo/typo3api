@@ -82,7 +82,7 @@ class SelectField extends AbstractField
         });
     }
 
-    private static function getValuesFromItems(array $items)
+    private static function getValuesFromItems(array $items): array
     {
         $values = [];
 
@@ -105,7 +105,7 @@ class SelectField extends AbstractField
         return $values;
     }
 
-    public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder)
+    public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder): array
     {
         $config = [
             'type' => 'select',

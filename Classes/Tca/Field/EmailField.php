@@ -17,7 +17,7 @@ class EmailField extends InputField
         ]);
     }
 
-    protected function getEvals()
+    protected function getEvals(): array
     {
         $evals = parent::getEvals();
         $evals[] = 'email';

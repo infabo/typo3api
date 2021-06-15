@@ -77,7 +77,7 @@ class TextareaField extends AbstractField
         });
     }
 
-    public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder)
+    public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder): array
     {
         $config = [
             'type' => 'text',

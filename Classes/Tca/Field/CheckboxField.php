@@ -26,7 +26,7 @@ class CheckboxField extends AbstractField
         $resolver->setAllowedTypes('default', 'bool');
     }
 
-    public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder)
+    public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder): array
     {
         return [
             'type' => 'check',

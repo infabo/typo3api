@@ -68,7 +68,7 @@ class FileField extends AbstractField
         });
     }
 
-    public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder)
+    public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder): array
     {
         return ExtensionManagementUtility::getFileFieldTCAConfig(
             $this->getOption('name'),

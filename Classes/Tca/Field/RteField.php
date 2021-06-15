@@ -20,7 +20,7 @@ class RteField extends AbstractField
         $resolver->setAllowedTypes('richtextConfiguration', 'string');
     }
 
-    public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder)
+    public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder): array
     {
         return [
             'type' => 'text',

@@ -108,7 +108,7 @@ class ImageField extends FileField
         }
     }
 
-    public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder)
+    public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder): array
     {
         $config = parent::getFieldTcaConfig($tcaBuilder);
 

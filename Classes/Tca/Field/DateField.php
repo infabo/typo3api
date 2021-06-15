@@ -81,7 +81,7 @@ class DateField extends AbstractField
 //        $resolver->setNormalizer('default', $timestampDate);
     }
 
-    public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder)
+    public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder): array
     {
         $config = [
             'type' => 'input',

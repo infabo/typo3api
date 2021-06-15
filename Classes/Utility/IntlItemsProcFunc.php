@@ -7,7 +7,7 @@ use Symfony\Component\Intl\Intl;
 
 class IntlItemsProcFunc
 {
-    public function addCountryNames(&$params)
+    public function addCountryNames(&$params): void
     {
         $countryNames = Intl::getRegionBundle()->getCountryNames('en');
         asort($countryNames);
@@ -16,7 +16,7 @@ class IntlItemsProcFunc
         }
     }
 
-    public function addLanguages(&$params)
+    public function addLanguages(&$params): void
     {
         $languageNames = Intl::getLanguageBundle()->getLanguageNames('en');
         asort($languageNames);

@@ -101,7 +101,7 @@ class InlineRelationField extends AbstractField
         }
     }
 
-    public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder)
+    public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder): array
     {
         $foreignTable = $this->getOption('foreign_table');
         if (!isset($GLOBALS['TCA'][$foreignTable])) {

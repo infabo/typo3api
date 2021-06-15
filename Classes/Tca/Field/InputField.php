@@ -79,7 +79,7 @@ class InputField extends AbstractField
         });
     }
 
-    public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder)
+    public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder): array
     {
         $config = [
             'type' => 'input',
@@ -103,7 +103,7 @@ class InputField extends AbstractField
     /**
      * @return array
      */
-    protected function getEvals()
+    protected function getEvals(): array
     {
         $evals = [];
 

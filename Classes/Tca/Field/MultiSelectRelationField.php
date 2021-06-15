@@ -71,7 +71,7 @@ class MultiSelectRelationField extends AbstractField
         });
     }
 
-    public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder)
+    public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder): array
     {
         if (!$tcaBuilder instanceof TableBuilderContext) {
             $type = is_object($tcaBuilder) ? get_class($tcaBuilder) : gettype($tcaBuilder);
@@ -134,7 +134,7 @@ class MultiSelectRelationField extends AbstractField
      *
      * @return string
      */
-    protected function getMnTableName(TableBuilderContext $tableBuilder)
+    protected function getMnTableName(TableBuilderContext $tableBuilder): string
     {
         return $tableBuilder->getTableName() . '_' . $this->getOption('name') . '_mm';
     }
