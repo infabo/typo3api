@@ -32,9 +32,9 @@ class Double2Field extends AbstractField
 
                 if ($options['min'] < 0.0) {
                     return "NUMERIC($digits, $decimals) DEFAULT '$default' NOT NULL";
-                } else {
-                    return "NUMERIC($digits, $decimals) UNSIGNED DEFAULT '$default' NOT NULL";
                 }
+
+                return "NUMERIC($digits, $decimals) UNSIGNED DEFAULT '$default' NOT NULL";
             },
             // a double field is most of the time not required to be localized
             'localize' => false,
