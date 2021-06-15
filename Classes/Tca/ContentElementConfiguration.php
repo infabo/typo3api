@@ -10,7 +10,7 @@ use Typo3Api\Builder\Context\TcaBuilderContext;
 
 class ContentElementConfiguration implements TcaConfigurationInterface
 {
-    const ICONS = [
+    public const ICONS = [
         'content-accordion',
         'content-audio',
         'content-bullets',
@@ -49,7 +49,7 @@ class ContentElementConfiguration implements TcaConfigurationInterface
         'content-textpic',
     ];
 
-    const HEADLINE = [
+    public const HEADLINE = [
         'normal' => '--palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:palette.headers;headers',
         'no_sub' => '--palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:palette.header;header',
         'hidden' => 'header;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:header.ALT.html_formlabel',

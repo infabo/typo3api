@@ -17,7 +17,7 @@ class MediaField extends FileField
      *
      * @see \Typo3Api\Tca\Field\ImageField::BLACKLISTED_FORMATS
      */
-    const BLACKLISTED_FORMATS = ['wav', 'ogg', 'flac', 'opus', 'webm'];
+    public const BLACKLISTED_FORMATS = ['wav', 'ogg', 'flac', 'opus', 'webm'];
 
     protected function configureOptions(OptionsResolver $resolver)
     {

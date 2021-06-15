@@ -25,7 +25,7 @@ class ImageField extends FileField
      * pdf is like pandora's box ... with memory leaks, timeouts etc.
      * bmp files tend to be huge ~ you shouldn't accept those
      */
-    const BLACKLISTED_FORMATS = ['svg', 'ai', 'pcx', 'tga', 'pdf', 'bmp'];
+    public const BLACKLISTED_FORMATS = ['svg', 'ai', 'pcx', 'tga', 'pdf', 'bmp'];
 
     protected function configureOptions(OptionsResolver $resolver)
     {
