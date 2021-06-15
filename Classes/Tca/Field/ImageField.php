@@ -35,7 +35,7 @@ class ImageField extends FileField
             'useAsThumbnail' => true,
             'allowedFileExtensions' => array_diff(
                 GeneralUtility::trimExplode(',', strtolower($GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'])),
-                ImageField::BLACKLISTED_FORMATS
+                self::BLACKLISTED_FORMATS
             ),
             'cropVariants' => null,
         ]);
@@ -74,8 +74,8 @@ class ImageField extends FileField
                         throw new \RuntimeException($msg);
                     }
 
-                    $x = floatval($parts[0]);
-                    $y = floatval($parts[1]);
+                    $x = (float)$parts[0];
+                    $y = (float)$parts[1];
                     if ($x <= 0 || $y <= 0) {
                         $msg = "Aspect ratio $aspectRatio did not return usable sizes, got $x and $y.";
                         throw new \RuntimeException($msg);

@@ -27,7 +27,7 @@ class SelectField extends AbstractField
             'items' => function (Options $options) {
                 return array_map(static function ($value) {
                     $label = preg_replace(['/([A-Z])/', '/[_\s]+/'], ['_$1', ' '], $value);
-                    $label = ucfirst(trim(strtolower($label)));
+                    $label = ucfirst(strtolower(trim($label)));
                     return [$label, $value];
                 }, $options['values']);
             },

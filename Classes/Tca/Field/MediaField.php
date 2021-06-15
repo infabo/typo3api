@@ -27,7 +27,7 @@ class MediaField extends FileField
             'allowedFileExtensions' => array_diff(
                 GeneralUtility::trimExplode(',', strtolower($GLOBALS['TYPO3_CONF_VARS']['SYS']['mediafile_ext'])),
                 ImageField::BLACKLISTED_FORMATS,
-                MediaField::BLACKLISTED_FORMATS
+                self::BLACKLISTED_FORMATS
             ),
         ]);
     }
