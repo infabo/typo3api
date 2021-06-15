@@ -74,7 +74,7 @@ class MultiSelectRelationField extends AbstractField
     public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder): array
     {
         if (!$tcaBuilder instanceof TableBuilderContext) {
-            $type = is_object($tcaBuilder) ? get_class($tcaBuilder) : gettype($tcaBuilder);
+            $type = get_debug_type($tcaBuilder);
             throw new \RuntimeException("Expected " . TableBuilderContext::class . ", got $type");
         }
 

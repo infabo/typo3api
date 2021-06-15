@@ -28,7 +28,7 @@ class ShowitemConfiguration implements TcaConfigurationInterface
         }
 
         if (!is_string($showitem)) {
-            $type = is_object($showitem) ? get_class($showitem) : gettype($showitem);
+            $type = get_debug_type($showitem);
             throw new \RuntimeException("Expected showitem to be a string or an array, got $type.");
         }
 

@@ -106,7 +106,7 @@ class ContentElementConfiguration implements TcaConfigurationInterface
     protected function testContext(TcaBuilderContext $context): TableBuilderContext
     {
         if (!$context instanceof TableBuilderContext) {
-            $type = is_object($context) ? get_class($context) : gettype($context);
+            $type = get_debug_type($context);
             throw new \RuntimeException("Expected " . TableBuilderContext::class . ", got $type");
         }
 
