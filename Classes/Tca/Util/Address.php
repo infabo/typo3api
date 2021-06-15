@@ -15,7 +15,7 @@ class Address extends NamedPalette
     /**
      * @var array
      */
-    protected $options;
+    protected array $options;
 
     /**
      * @var string

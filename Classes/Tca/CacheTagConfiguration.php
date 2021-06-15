@@ -18,12 +18,12 @@ class CacheTagConfiguration implements TcaConfigurationInterface
     /**
      * @var string
      */
-    private $tag;
+    private string $tag;
 
     /**
      * @var string
      */
-    private $group;
+    private string $group;
 
     public function __construct(string $tag, string $group = 'pages')
     {

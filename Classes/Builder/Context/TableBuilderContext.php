@@ -9,12 +9,12 @@ class TableBuilderContext implements TcaBuilderContext
     /**
      * @var string
      */
-    private $tableName;
+    private string $tableName;
 
     /**
      * @var string
      */
-    private $typeName;
+    private string $typeName;
 
     public function __construct(string $tableName, string $typeName)
     {

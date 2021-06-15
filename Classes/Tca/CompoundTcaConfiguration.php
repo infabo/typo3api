@@ -19,7 +19,7 @@ class CompoundTcaConfiguration implements TcaConfigurationInterface, \IteratorAg
      *
      * @var TcaConfigurationInterface[]
      */
-    protected $children;
+    protected array $children;
 
     public function __construct(array $children = [])
     {

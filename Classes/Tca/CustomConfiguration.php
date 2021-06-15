@@ -14,7 +14,7 @@ class CustomConfiguration implements TcaConfigurationInterface
     /**
      * @var array
      */
-    private $options;
+    private array $options;
 
     public function __construct(array $options)
     {

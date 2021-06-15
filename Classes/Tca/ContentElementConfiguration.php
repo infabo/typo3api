@@ -59,11 +59,11 @@ class ContentElementConfiguration implements TcaConfigurationInterface
     /**
      * @var array
      */
-    private $options;
+    private array $options;
     /**
      * @var OptionsResolver
      */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     public function __construct(array $options = [])
     {

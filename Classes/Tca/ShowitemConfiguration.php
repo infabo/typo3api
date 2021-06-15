@@ -16,7 +16,7 @@ class ShowitemConfiguration implements TcaConfigurationInterface
     /**
      * @var string
      */
-    private $showitem;
+    private string $showitem;
 
     /**
      * @param string|array $showitem

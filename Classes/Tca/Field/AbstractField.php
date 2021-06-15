@@ -23,7 +23,7 @@ abstract class AbstractField implements TcaConfigurationInterface
      * A cache for option resolvers to speed up duplicate usage.
      * @var array
      */
-    private static $optionResolvers = [];
+    private static array $optionResolvers = [];
 
     /**
      * CommonField constructor.

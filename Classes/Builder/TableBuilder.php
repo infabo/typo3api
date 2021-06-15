@@ -23,7 +23,7 @@ class TableBuilder implements TcaBuilderInterface
     /**
      * @var TableBuilderContext
      */
-    private $context;
+    private TableBuilderContext $context;
 
     /**
      * This is a list of default tabs.
@@ -32,7 +32,7 @@ class TableBuilder implements TcaBuilderInterface
      *
      * @var array
      */
-    private $defaultTabs = [];
+    private array $defaultTabs = [];
 
     /**
      * TableBuilder constructor.

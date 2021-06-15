@@ -12,7 +12,7 @@ class TcaConfigurationException extends \RuntimeException
     /**
      * @var TcaConfigurationInterface
      */
-    private $configuration;
+    private TcaConfigurationInterface $configuration;
 
     public function __construct(TcaConfigurationInterface $configuration, $message = "", $code = 0, Throwable $previous = null)
     {
