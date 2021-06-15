@@ -44,6 +44,9 @@ class FileField extends AbstractField
                 $fileExtensions = GeneralUtility::trimExplode(',', $fileExtensions);
             }
 
+            /**
+             * @phpstan-ignore-next-line
+             */
             return implode(',', array_filter($fileExtensions, 'strlen'));
         };
         $resolver->setNormalizer('allowedFileExtensions', $normalizeFileExtensions);

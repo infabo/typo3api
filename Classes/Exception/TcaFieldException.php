@@ -16,7 +16,8 @@ class TcaFieldException extends TcaConfigurationException
 
     public function getField(): AbstractField
     {
-        /** @noinspection PhpIncompatibleReturnTypeInspection */
+        /** @noinspection PhpIncompatibleReturnTypeInspection
+         * @phpstan-ignore-next-line */
         return $this->getConfiguration();
     }
 }

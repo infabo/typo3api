@@ -43,6 +43,7 @@
     }
   },
   "require-dev": {
+    "friendsoftypo3/phpstan-typo3": "^0.8.1",
     "phpunit/phpunit": "^6.0",
     "symplify/easy-coding-standard": "^9.3",
     "typo3/cms-composer-installers": ">=1.4"

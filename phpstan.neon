@@ -1,0 +1,24 @@
+includes:
+    - vendor/friendsoftypo3/phpstan-typo3/extension.neon
+
+parameters:
+  level: 5
+
+  # Set to true during local runs to find unmatched ignored errors. bamboo needs this to be set to false.
+  reportUnmatchedIgnoredErrors: false
+
+  checkMissingIterableValueType: false
+
+  paths:
+    - %currentWorkingDirectory%/Classes
+
+  excludes_analyse:
+    - %currentWorkingDirectory%/Tests/*
+    - %currentWorkingDirectory%/Documentation/*
+    - %currentWorkingDirectory%/Resources/*
+    - %currentWorkingDirectory%/Configuration/*
+
+  ignoreErrors:
+    # ignored errors for level 0
+    - '#Variable \$_EXTKEY might not be defined\.#'
+    - '#Parameter \#2 \$optionKey of method TYPO3\\CMS\\Extbase\\Property\\PropertyMappingConfiguration::setTypeConverterOption\(\) expects string, int given\.#'
