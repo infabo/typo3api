@@ -1,64 +1,60 @@
 {
-  "name": "nemo64/typo3api",
-  "type": "typo3-cms-extension",
-  "license": "MIT",
-  "keywords": [
-    "TYPO3",
-    "api",
-    "TCA",
-    "tsconfig",
-    "ext_tables.php",
-    "ext_localconf.php"
-  ],
-  "support": {
-    "issues": "https://github.com/Nemo64/typo3api/issues"
-  },
-  "authors": [
-    {
-      "name": "Marco Pfeiffer",
-      "role": "Developer",
-      "homepage": "https://www.marco.zone/"
-    }
-  ],
-  "extra": {
-    "typo3/cms": {
-      "web-dir": "web"
-    }
-  },
-  "require": {
-    "php": "^7.4",
-    "symfony/intl": "^5",
-    "symfony/options-resolver": "^5",
-    "symfony/polyfill-mbstring": "^1",
-    "typo3/cms-backend": "^10.4",
-    "typo3/cms-core": "^10.4",
-    "typo3/cms-extbase": "^10.4",
-    "typo3/cms-frontend": "^10.4",
-    "typo3/cms-install": "^10.4",
-    "typo3/cms-lang": "^10.4"
-  },
-  "autoload": {
-    "psr-4": {
-      "Typo3Api\\": "Classes"
-    }
-  },
-  "require-dev": {
-    "friendsoftypo3/phpstan-typo3": "^0.8.1",
-    "phpunit/phpunit": "^6.0",
-    "symplify/easy-coding-standard": "^9.3",
-    "typo3/cms-composer-installers": ">=1.4"
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Typo3Api\\": "Tests"
-    }
-  },
-  "config": {
-    "sort-packages": true
-  },
-  "extra": {
-    "typo3/cms": {
-      "extension-key": "typo3api"
-    }
-  }
+	"name": "nemo64/typo3api",
+	"type": "typo3-cms-extension",
+	"license": "MIT",
+	"keywords": [
+		"TYPO3",
+		"api",
+		"TCA",
+		"tsconfig",
+		"ext_tables.php",
+		"ext_localconf.php"
+	],
+	"support": {
+		"issues": "https://github.com/Nemo64/typo3api/issues"
+	},
+	"authors": [
+		{
+			"name": "Marco Pfeiffer",
+			"role": "Developer",
+			"homepage": "https://www.marco.zone/"
+		}
+	],
+	"extra": {
+		"typo3/cms": {
+			"web-dir": "web",
+			"extension-key": "typo3api"
+		}
+	},
+	"require": {
+		"php": "^7.4",
+		"symfony/intl": "^5",
+		"symfony/options-resolver": "^5",
+		"symfony/polyfill-mbstring": "^1",
+		"typo3/cms-backend": "^10.4",
+		"typo3/cms-core": "^10.4",
+		"typo3/cms-extbase": "^10.4",
+		"typo3/cms-frontend": "^10.4",
+		"typo3/cms-install": "^10.4",
+		"typo3/cms-lang": "^10.4"
+	},
+	"autoload": {
+		"psr-4": {
+			"Typo3Api\\": "Classes"
+		}
+	},
+	"require-dev": {
+		"friendsoftypo3/phpstan-typo3": "^0.8.1",
+		"phpunit/phpunit": "^6.0",
+		"symplify/easy-coding-standard": "^9.3",
+		"typo3/cms-composer-installers": ">=1.4"
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Typo3Api\\": "Tests"
+		}
+	},
+	"config": {
+		"sort-packages": true
+	}
 }
