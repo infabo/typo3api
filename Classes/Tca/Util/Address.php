@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Typo3Api\Tca\Util;
 
 use Typo3Api\Tca\Field\CountryField;

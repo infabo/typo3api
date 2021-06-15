@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Typo3Api\Builder\Context;
 
 class TableBuilderContext implements TcaBuilderContext

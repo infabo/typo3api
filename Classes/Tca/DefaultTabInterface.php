@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Typo3Api\Tca;
 
 interface DefaultTabInterface extends TcaConfigurationInterface

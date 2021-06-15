@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Created by PhpStorm.
  * User: marco
@@ -344,7 +346,7 @@ class TableBuilder implements TcaBuilderInterface
         $newTab = '--div--; ' . $tab . ', ' . $showItemString;
 
         // put the new tab right before the first "default tab"
-        if (count($this->defaultTabs) > 0 && !in_array($tab, $this->defaultTabs)) {
+        if (count($this->defaultTabs) > 0 && !in_array($tab, $this->defaultTabs, true)) {
             $search = '/--div--\s*;\s*' . preg_quote(reset($this->defaultTabs), '/') . '.*(?=,\s*--div--|$)/Us';
             $type['showitem'] = preg_replace($search, $newTab . ', \0', $type['showitem'], 1, $matches);
             if ($matches > 0) {

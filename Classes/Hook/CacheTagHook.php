@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Typo3Api\Hook;
 
 use TYPO3\CMS\Core\Cache\CacheManager;
