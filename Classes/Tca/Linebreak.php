@@ -28,7 +28,7 @@ class Linebreak implements TcaConfigurationInterface
         return '--linebreak--';
     }
 
-    public function getDbTableDefinitions(TableBuilderContext $tcaBuilder): array
+    public function getDbTableDefinitions(TableBuilderContext $tableBuilder): array
     {
         return [];
     }
