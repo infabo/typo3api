@@ -134,7 +134,7 @@ abstract class AbstractField implements TcaConfigurationInterface
             } else {
                 if (!isset($ctrl['label_alt'])) {
                     $ctrl['label_alt'] = $fieldName;
-                } else if (strpos($ctrl['label_alt'], $fieldName) === false) {
+                } else if (!str_contains($ctrl['label_alt'], $fieldName)) {
                     $ctrl['label_alt'] .= ', ' . $fieldName;
                 }
             }
@@ -143,7 +143,7 @@ abstract class AbstractField implements TcaConfigurationInterface
         if ($this->getOption('searchField')) {
             if (!isset($ctrl['searchFields'])) {
                 $ctrl['searchFields'] = $fieldName;
-            } else if (strpos($ctrl['searchFields'], $fieldName) === false) {
+            } else if (!str_contains($ctrl['searchFields'], $fieldName)) {
                 $ctrl['searchFields'] .= ', ' . $fieldName;
             }
         }
