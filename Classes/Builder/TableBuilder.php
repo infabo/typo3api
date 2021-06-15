@@ -56,7 +56,7 @@ class TableBuilder implements TcaBuilderInterface
     public static function create(string $name, string $typeName = '1'): TableBuilder
     {
         /** @var TableBuilder $tableBuilder */
-        $tableBuilder = GeneralUtility::makeInstance(get_called_class(), $name, $typeName);
+        $tableBuilder = GeneralUtility::makeInstance(static::class, $name, $typeName);
         if (!$tableBuilder->getTitle()) {
             $title = preg_replace('#tx_[^_]+_#su', '', $name);
             $title = str_replace('_', ' ', $title);
