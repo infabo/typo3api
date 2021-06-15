@@ -77,7 +77,7 @@ class ContentElementConfiguration implements TcaConfigurationInterface
                 return $options['typeName'];
             },
             'icon' => function (Options $options) {
-                $icons = array_map(function ($icon) use ($options) {
+                $icons = array_map(static function ($icon) use ($options) {
                     $name = basename($icon, '.svg');
                     return [
                         'diff' => levenshtein($options['typeName'], strtok($name, 'content-')),

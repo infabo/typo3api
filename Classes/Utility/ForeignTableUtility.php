@@ -25,7 +25,7 @@ class ForeignTableUtility
         // append sorting if available
         if (isset($foreignTable['ctrl']['sortby'])) {
             $sortByField = $foreignTableName . '.' . $foreignTable['ctrl']['sortby'];
-            $where = preg_replace_callback(self::ORDER_BY_REGEX, function ($match) use ($sortByField) {
+            $where = preg_replace_callback(self::ORDER_BY_REGEX, static function ($match) use ($sortByField) {
                 if (isset($match[3])) {
                     return ' ORDER BY' . $match[3] . ', ' . $sortByField;
                 }
@@ -39,7 +39,7 @@ class ForeignTableUtility
             }
 
             $sortByStr = implode(', ', $sortByDefinitions);
-            $where = preg_replace_callback(self::ORDER_BY_REGEX, function ($match) use ($sortByStr) {
+            $where = preg_replace_callback(self::ORDER_BY_REGEX, static function ($match) use ($sortByStr) {
                 if (isset($match[3])) {
                     return ' ORDER BY' . $match[3] . ', ' . $sortByStr;
                 }
