@@ -2,7 +2,6 @@
 
 namespace Typo3Api\Tca\Field;
 
-
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -29,7 +28,7 @@ abstract class AbstractField implements TcaConfigurationInterface
      * @param string $name
      * @param array $options
      */
-    public final function __construct(string $name, array $options = [])
+    final public function __construct(string $name, array $options = [])
     {
         // Nicer creation syntax when passing name as a direct parameter instead of expecting an option.
         // However: the name must be an option so that it is available during option resolving.
@@ -89,7 +88,6 @@ abstract class AbstractField implements TcaConfigurationInterface
 
         /** @noinspection PhpUnusedParameterInspection */
         $resolver->setNormalizer('name', function (Options $options, $name) {
-
             if (strlen($name) > 64) {
                 $msg = "The field name should be at most 64 characters long. (and even that... are you insane?)";
                 throw new InvalidOptionsException($msg);
@@ -134,7 +132,7 @@ abstract class AbstractField implements TcaConfigurationInterface
             } else {
                 if (!isset($ctrl['label_alt'])) {
                     $ctrl['label_alt'] = $fieldName;
-                } else if (!str_contains($ctrl['label_alt'], $fieldName)) {
+                } elseif (!str_contains($ctrl['label_alt'], $fieldName)) {
                     $ctrl['label_alt'] .= ', ' . $fieldName;
                 }
             }
@@ -143,7 +141,7 @@ abstract class AbstractField implements TcaConfigurationInterface
         if ($this->getOption('searchField')) {
             if (!isset($ctrl['searchFields'])) {
                 $ctrl['searchFields'] = $fieldName;
-            } else if (!str_contains($ctrl['searchFields'], $fieldName)) {
+            } elseif (!str_contains($ctrl['searchFields'], $fieldName)) {
                 $ctrl['searchFields'] .= ', ' . $fieldName;
             }
         }

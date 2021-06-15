@@ -2,7 +2,6 @@
 
 namespace Typo3Api\Hook;
 
-
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 

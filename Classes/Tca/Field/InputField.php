@@ -2,7 +2,6 @@
 
 namespace Typo3Api\Tca\Field;
 
-
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -45,7 +44,7 @@ class InputField extends AbstractField
 
                 $default = addslashes($options['default']);
                 return "VARCHAR($maxCharacters) DEFAULT '$default' NOT NULL";
-                // using anything but varchar here would make searchFields slow.
+            // using anything but varchar here would make searchFields slow.
                 // I opted to prevent large input fields and by default add everything to searchFields
                 // also, i can easily use the default option here which is nice.
             },

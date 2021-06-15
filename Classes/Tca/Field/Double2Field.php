@@ -2,7 +2,6 @@
 
 namespace Typo3Api\Tca\Field;
 
-
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Typo3Api\Builder\Context\TcaBuilderContext;

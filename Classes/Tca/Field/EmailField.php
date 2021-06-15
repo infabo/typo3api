@@ -2,7 +2,6 @@
 
 namespace Typo3Api\Tca\Field;
 
-
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EmailField extends InputField
@@ -23,5 +22,4 @@ class EmailField extends InputField
         $evals[] = 'email';
         return $evals;
     }
-
 }

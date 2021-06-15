@@ -2,7 +2,6 @@
 
 namespace Typo3Api\Tca\Field;
 
-
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -10,7 +9,6 @@ use Typo3Api\Builder\Context\TableBuilderContext;
 use Typo3Api\Builder\Context\TcaBuilderContext;
 use Typo3Api\Builder\TableBuilder;
 use Typo3Api\Utility\ForeignTableUtility;
-
 
 class MultiSelectRelationField extends AbstractField
 {
@@ -138,5 +136,4 @@ class MultiSelectRelationField extends AbstractField
     {
         return $tableBuilder->getTableName() . '_' . $this->getOption('name') . '_mm';
     }
-
 }

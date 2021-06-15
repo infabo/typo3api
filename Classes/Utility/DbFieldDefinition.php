@@ -2,7 +2,6 @@
 
 namespace Typo3Api\Utility;
 
-
 class DbFieldDefinition
 {
     public static function getIntForNumberRange(int $low, int $high, int $default = 0): string

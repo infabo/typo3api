@@ -8,7 +8,6 @@
 
 namespace Typo3Api\Builder;
 
-
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use Typo3Api\Builder\Context\TableBuilderContext;
@@ -90,7 +89,7 @@ class TableBuilder implements TcaBuilderInterface
      */
     public function configureInTab(string $tab, TcaConfigurationInterface $configuration): TcaBuilderInterface
     {
-        $tca =& $GLOBALS['TCA'][$this->getTableName()];
+        $tca = &$GLOBALS['TCA'][$this->getTableName()];
 
         $configuration->modifyCtrl($tca['ctrl'], $this->context);
         $this->addShowItemToTab($tca, $configuration, $tab);
@@ -107,7 +106,7 @@ class TableBuilder implements TcaBuilderInterface
      */
     public function configureAtPosition(string $position, TcaConfigurationInterface $configuration): TcaBuilderInterface
     {
-        $tca =& $GLOBALS['TCA'][$this->getTableName()];
+        $tca = &$GLOBALS['TCA'][$this->getTableName()];
 
         $configuration->modifyCtrl($tca['ctrl'], $this->context);
         $this->addShowItemAtPosition($tca, $configuration, $position);
@@ -135,7 +134,7 @@ class TableBuilder implements TcaBuilderInterface
      */
     public function inheritConfigurationFromType(string $type): TcaBuilderInterface
     {
-        $tca =& $GLOBALS['TCA'][$this->getTableName()];
+        $tca = &$GLOBALS['TCA'][$this->getTableName()];
 
         if (!isset($tca['types'][$type])) {
             $msg = "The Type $type isn't defined so it can't be inherited from it.";
@@ -157,7 +156,7 @@ class TableBuilder implements TcaBuilderInterface
      */
     public function addOrMoveTabInFrontOfTab(string $tab, string $otherTab): TcaBuilderInterface
     {
-        $type =& $GLOBALS['TCA'][$this->getTableName()]['types'][$this->getTypeName()];
+        $type = &$GLOBALS['TCA'][$this->getTableName()]['types'][$this->getTypeName()];
 
         $search = '/--div--\s*;\s*' . preg_quote($tab, '/') . '.*?(?=,\s?--div--|$)/Us';
         $match = preg_match($search, $type['showitem'], $results);
@@ -326,7 +325,7 @@ class TableBuilder implements TcaBuilderInterface
         if (!isset($tca['types'][$this->getTypeName()])) {
             $tca['types'][$this->getTypeName()] = [];
         }
-        $type =& $tca['types'][$this->getTypeName()];
+        $type = &$tca['types'][$this->getTypeName()];
 
         $showItemString = $configuration->getShowItemString($this->context);
         if ($showItemString === '') {

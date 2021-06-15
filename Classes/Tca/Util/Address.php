@@ -2,7 +2,6 @@
 
 namespace Typo3Api\Tca\Util;
 
-
 use Typo3Api\Tca\Field\CountryField;
 use Typo3Api\Tca\Field\InputField;
 use Typo3Api\Tca\Field\TextareaField;

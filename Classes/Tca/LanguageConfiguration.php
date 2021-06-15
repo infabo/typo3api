@@ -2,10 +2,8 @@
 
 namespace Typo3Api\Tca;
 
-
 use Typo3Api\Builder\Context\TableBuilderContext;
 use Typo3Api\Builder\Context\TcaBuilderContext;
-
 
 class LanguageConfiguration implements TcaConfigurationInterface, DefaultTabInterface
 {
@@ -110,5 +108,4 @@ class LanguageConfiguration implements TcaConfigurationInterface, DefaultTabInte
     {
         return 'LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language';
     }
-
 }

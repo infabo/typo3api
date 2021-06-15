@@ -2,10 +2,8 @@
 
 namespace Typo3Api\Tca;
 
-
 use Typo3Api\Builder\Context\TableBuilderContext;
 use Typo3Api\Builder\Context\TcaBuilderContext;
-
 
 /**
  * This simple configuration just passes though the showitem string passed during construct.

@@ -2,14 +2,12 @@
 
 namespace Typo3Api\Tca\Field;
 
-
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Typo3Api\Builder\Context\TableBuilderContext;
 use Typo3Api\Builder\Context\TcaBuilderContext;
 use Typo3Api\Utility\ForeignTableUtility;
-
 
 class SelectRelationField extends AbstractField
 {

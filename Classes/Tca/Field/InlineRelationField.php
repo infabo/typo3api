@@ -2,7 +2,6 @@
 
 namespace Typo3Api\Tca\Field;
 
-
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -133,12 +132,12 @@ class InlineRelationField extends AbstractField
                 'showAllLocalizationLink' => $canLocalize,
                 'showSynchronizationLink' => $canLocalize, // potentially dangerous...
                 'enabledControls' => [
-                    'info' => TRUE,
-                    'new' => TRUE,
+                    'info' => true,
+                    'new' => true,
                     'dragdrop' => $canBeSorted,
                     'sort' => $canBeSorted,
                     'hide' => $canHide,
-                    'delete' => TRUE,
+                    'delete' => true,
                     'localize' => $canLocalize,
                 ],
             ],

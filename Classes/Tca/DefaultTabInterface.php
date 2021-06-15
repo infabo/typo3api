@@ -2,7 +2,6 @@
 
 namespace Typo3Api\Tca;
 
-
 interface DefaultTabInterface extends TcaConfigurationInterface
 {
     /**

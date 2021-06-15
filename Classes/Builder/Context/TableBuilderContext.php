@@ -2,7 +2,6 @@
 
 namespace Typo3Api\Builder\Context;
 
-
 class TableBuilderContext implements TcaBuilderContext
 {
     /**

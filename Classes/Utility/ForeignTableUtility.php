@@ -2,7 +2,6 @@
 
 namespace Typo3Api\Utility;
 
-
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -32,7 +31,7 @@ class ForeignTableUtility
 
                 return ' ORDER BY ' . $sortByField;
             }, $where, 1);
-        } else if (isset($foreignTable['ctrl']['default_sortby'])) {
+        } elseif (isset($foreignTable['ctrl']['default_sortby'])) {
             $sortByDefinitions = GeneralUtility::trimExplode(',', $foreignTable['ctrl']['default_sortby']);
             foreach ($sortByDefinitions as &$sortByDefinition) {
                 $sortByDefinition = $foreignTableName . '.' . $sortByDefinition;

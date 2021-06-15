@@ -8,7 +8,6 @@
 
 namespace Typo3Api\Builder;
 
-
 use Typo3Api\Tca\TcaConfigurationInterface;
 
 interface TcaBuilderInterface

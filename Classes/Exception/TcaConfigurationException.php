@@ -2,7 +2,6 @@
 
 namespace Typo3Api\Exception;
 
-
 use Throwable;
 use Typo3Api\Tca\TcaConfigurationInterface;
 

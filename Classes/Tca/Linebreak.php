@@ -2,10 +2,8 @@
 
 namespace Typo3Api\Tca;
 
-
 use Typo3Api\Builder\Context\TableBuilderContext;
 use Typo3Api\Builder\Context\TcaBuilderContext;
-
 
 class Linebreak implements TcaConfigurationInterface
 {
@@ -32,5 +30,4 @@ class Linebreak implements TcaConfigurationInterface
     {
         return [];
     }
-
 }
