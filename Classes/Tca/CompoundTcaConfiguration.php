@@ -36,9 +36,7 @@ class CompoundTcaConfiguration implements TcaConfigurationInterface, \IteratorAg
 
     final public function getIterator(): \Iterator
     {
-        foreach ($this->children as $child) {
-            yield $child;
-        }
+        yield from $this->children;
     }
 
     final public function modifyCtrl(array &$ctrl, TcaBuilderContext $tcaBuilder): void
