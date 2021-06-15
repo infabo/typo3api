@@ -176,6 +176,13 @@ class InlineRelationField extends AbstractField
         $tableDefinitions[$foreignTable][] = "`$foreignField` INT(11) DEFAULT '0' NOT NULL";
         $tableDefinitions[$foreignTable][] = "KEY `$foreignField`(`$foreignField`)";
 
+        $foreignTable = $this->getOption('foreign_table');
+        $foreignTableDefinition = $GLOBALS['TCA'][$foreignTable];
+        if(@$foreignTableDefinition['ctrl']['sortby'] !== null) {
+            // sorting is always local to the pid so putting that in the index might help a lot
+            $tableDefinitions[$foreignTable][] = "INDEX sorting (pid, {$foreignTableDefinition['ctrl']['sortby']})";
+        }
+
         return $tableDefinitions;
     }
 }

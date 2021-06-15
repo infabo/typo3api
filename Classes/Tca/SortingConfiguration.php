@@ -37,11 +37,6 @@ class SortingConfiguration implements TcaConfigurationInterface
 
     public function getDbTableDefinitions(TableBuilderContext $tableBuilder): array
     {
-        return [
-            $tableBuilder->getTableName() => [
-                // sorting is always local to the pid so putting that in the index might help a lot
-                "INDEX sorting (pid, sorting ASC)",
-            ]
-        ];
+        return [];
     }
 }
