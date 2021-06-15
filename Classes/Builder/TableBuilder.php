@@ -77,11 +77,10 @@ class TableBuilder implements TcaBuilderInterface
         if ($configuration instanceof DefaultTabInterface) {
             $tabName = $configuration->getDefaultTab();
             $this->defaultTabs[] = $tabName;
-            return $this->configureInTab($tabName, $configuration);
         } else {
             $tabName = 'LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general';
-            return $this->configureInTab($tabName, $configuration);
         }
+        return $this->configureInTab($tabName, $configuration);
     }
 
     /**
