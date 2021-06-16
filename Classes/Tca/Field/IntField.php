@@ -18,7 +18,7 @@ class IntField extends AbstractField
             'min' => 0,
             'max' => 1000000, // default up to a million
             'size' => function (Options $options) {
-                return max(strlen($options['min']), strlen($options['max']));
+                return max(strlen((string)$options['min']), strlen((string)$options['max']));
             },
             'default' => function (Options $options) {
                 // try to get default as close to 0 as possible

@@ -20,7 +20,7 @@ class Double2Field extends AbstractField
                 /**
                  * @phpstan-ignore-next-line
                  */
-                $preDecimalSize = max(strlen((int)$options['min']), strlen((int)$options['max']));
+                $preDecimalSize = max(strlen((string)(int)$options['min']), strlen((string)(int)$options['max']));
                 return $preDecimalSize + 3; // point + 2 digits after the point
             },
             'default' => function (Options $options) {
