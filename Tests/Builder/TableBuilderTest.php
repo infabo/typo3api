@@ -2,14 +2,14 @@
 
 namespace Typo3Api\Builder;
 
-use PHPUnit\Framework\TestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use Typo3Api\PreparationForTypo3;
 
-class TableBuilderTest extends TestCase
+class TableBuilderTest extends UnitTestCase
 {
     use PreparationForTypo3;
 
-    public function testCreateTable()
+    public function testCreateTable(): void
     {
         TableBuilder::create('test_table');
         $this->assertArrayHasKey('ctrl', $GLOBALS['TCA']['test_table']);

@@ -2,14 +2,14 @@
 
 namespace Typo3Api\Tca;
 
-use PHPUnit\Framework\TestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use Typo3Api\Builder\Context\TableBuilderContext;
 use Typo3Api\Builder\TableBuilder;
 use Typo3Api\Hook\SqlSchemaHookUtil;
 use Typo3Api\PreparationForTypo3;
 use Typo3Api\Tca\Field\InputField;
 
-class CompoundTcaConfigurationTest extends TestCase
+class CompoundTcaConfigurationTest extends UnitTestCase
 {
     use PreparationForTypo3;
     use SqlSchemaHookUtil;

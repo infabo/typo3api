@@ -77,7 +77,7 @@ class FileFieldTest extends AbstractFieldTest
         );
     }
 
-    public function testAllowedFileExt()
+    public function testAllowedFileExt(): void
     {
         $testTable = new TableBuilderContext('stub_table', '1');
 

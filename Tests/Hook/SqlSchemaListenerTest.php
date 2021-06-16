@@ -2,23 +2,27 @@
 
 namespace Typo3Api\Hook;
 
-use PHPUnit\Framework\TestCase;
+use TYPO3\CMS\Core\Database\Event\AlterTableDefinitionStatementsEvent;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use Typo3Api\Builder\Context\TableBuilderContext;
+use Typo3Api\EventListener\SqlSchemaListener;
 use Typo3Api\PreparationForTypo3;
 use Typo3Api\Tca\CustomConfiguration;
 
-class SqlSchemaHookTest extends TestCase
+class SqlSchemaListenerTest extends UnitTestCase
 {
     use PreparationForTypo3;
 
-    public function testEmptyModify()
+    public function testEmptyModify(): void
     {
-        $schemaHook = new SqlSchemaHook();
-        $sql = $schemaHook->modifyTablesDefinitionString([]);
-        $this->assertEquals([[]], $sql);
+        $schemaListener = new SqlSchemaListener();
+        $event = new AlterTableDefinitionStatementsEvent([]);
+        $schemaListener->__invoke($event);
+        $sql = $event->getSqlData();
+        $this->assertEquals([], $sql);
     }
 
-    public function testCreateTable()
+    public function testCreateTable(): void
     {
         $testTable = new TableBuilderContext('test_table', '1');
 
@@ -26,12 +30,14 @@ class SqlSchemaHookTest extends TestCase
         $configuration = new CustomConfiguration(['dbTableDefinition' => ['test_table' => [$fieldDefinition]]]);
         $GLOBALS['TCA']['test_table']['ctrl']['EXT']['typo3api']['sql'] = $configuration->getDbTableDefinitions($testTable);
 
-        $schemaHook = new SqlSchemaHook();
-        $sql = $schemaHook->modifyTablesDefinitionString([]);
-        $this->assertEquals([["CREATE TABLE `test_table` (\n$fieldDefinition\n);"]], $sql);
+        $schemaListener = new SqlSchemaListener();
+        $event = new AlterTableDefinitionStatementsEvent([]);
+        $schemaListener->__invoke($event);
+        $sql = $event->getSqlData();
+        $this->assertEquals(["CREATE TABLE `test_table` (\n$fieldDefinition\n);"], $sql);
     }
 
-    public function testModifyTable()
+    public function testModifyTable(): void
     {
         $testTable = new TableBuilderContext('test_table', '1');
 
@@ -40,13 +46,16 @@ class SqlSchemaHookTest extends TestCase
         $configuration = new CustomConfiguration(['dbTableDefinition' => ['test_table' => [$fieldDefinition]]]);
         $GLOBALS['TCA']['test_table']['ctrl']['EXT']['typo3api']['sql'] = $configuration->getDbTableDefinitions($testTable);
 
-        $schemaHook = new SqlSchemaHook();
-        $sql = $schemaHook->modifyTablesDefinitionString([$previousDefinition]);
-        $this->assertEquals([
+        $schemaListener = new SqlSchemaListener();
+        $event = new AlterTableDefinitionStatementsEvent([$previousDefinition]);
+        $schemaListener->__invoke($event);
+        $sql = $event->getSqlData();
+
+        $this->assertEquals(
             [
                 $previousDefinition,
                 "CREATE TABLE `test_table` (\n$fieldDefinition\n);"
             ]
-        ], $sql);
+            , $sql);
     }
 }

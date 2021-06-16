@@ -42,6 +42,8 @@ class BaseConfiguration implements TcaConfigurationInterface
 
     public function getDbTableDefinitions(TableBuilderContext $tableBuilder): array
     {
-        return [];
+        return [
+            $tableBuilder->getTableName() => []
+        ];
     }
 }

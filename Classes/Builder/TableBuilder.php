@@ -196,7 +196,7 @@ class TableBuilder implements TcaBuilderInterface
 
     public function getTitle(): string
     {
-        if (!is_string($GLOBALS['TCA'][$this->getTableName()]['ctrl']['title'])) {
+        if (!isset($GLOBALS['TCA'][$this->getTableName()]['ctrl']['title']) || !is_string($GLOBALS['TCA'][$this->getTableName()]['ctrl']['title'])) {
             return '';
         }
 
@@ -279,7 +279,8 @@ class TableBuilder implements TcaBuilderInterface
             if (count($missingColumns) > 0) {
                 $confClass = get_class($configuration);
                 $definedColumns = implode(', ', array_keys($columns));
-                $alreadyDefinedColumns = implode(', ', array_intersect(array_keys($existingColumns), array_keys($columns)));
+                $alreadyDefinedColumns = implode(', ',
+                    array_intersect(array_keys($existingColumns), array_keys($columns)));
                 $notDefinedColumns = implode(', ', $missingColumns);
                 $msg = "The $confClass defined the database columns $definedColumns.\n";
                 $msg .= "However, the columns $alreadyDefinedColumns are already defined.\n";
@@ -336,7 +337,7 @@ class TableBuilder implements TcaBuilderInterface
 
         // search the correct tab and add the content into it
         $search = '/--div--\s*;\s*' . preg_quote($tab, '/') . '.*(?=,\s*--div--|$)/Us';
-        $type['showitem'] = preg_replace($search, '\0,' . $showItemString, $type['showitem'], 1, $matches);
+        $type['showitem'] = preg_replace($search, '\0,' . $showItemString, $type['showitem'] ?? '', 1, $matches);
         if ($matches > 0) {
             return;
         }
@@ -367,8 +368,11 @@ class TableBuilder implements TcaBuilderInterface
      * @param TcaConfigurationInterface $configuration
      * @param string $position
      */
-    protected function addShowItemAtPosition(array &$tca, TcaConfigurationInterface $configuration, string $position): void
-    {
+    protected function addShowItemAtPosition(
+        array &$tca,
+        TcaConfigurationInterface $configuration,
+        string $position
+    ): void {
         $showItemString = $configuration->getShowItemString($this->context);
         if ($showItemString === '') {
             return;

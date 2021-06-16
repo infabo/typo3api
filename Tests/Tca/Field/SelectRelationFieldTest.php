@@ -36,7 +36,7 @@ class SelectRelationFieldTest extends AbstractFieldTest
         ], $field->getColumns($testTable));
     }
 
-    public function testForeignTableSorting()
+    public function testForeignTableSorting(): void
     {
         $GLOBALS['TCA']['tx_typo3api_foreign_table'] = ['ctrl' => ['sortby' => 'sorting']];
         $testTable = new TableBuilderContext('stub_table', '1');

@@ -9,7 +9,7 @@ class InlineRelationFieldTest extends AbstractFieldTest
 {
     const STUB_DB_TYPE = "TINYINT(3) UNSIGNED DEFAULT '0' NOT NULL";
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $GLOBALS['TCA']['tx_typo3api_foreign_table'] = [

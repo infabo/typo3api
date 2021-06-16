@@ -55,32 +55,32 @@ class ImageFieldTest extends FileFieldTest
                         'types' => [
                             '0' => [
                                 'showitem' => '
-                                --palette--;LLL:EXT:lang/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                                --palette--;;imageoverlayPalette,
                                 --palette--;;filePalette'
                             ],
                             File::FILETYPE_TEXT => [
                                 'showitem' => '
-                                --palette--;LLL:EXT:lang/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                                --palette--;;imageoverlayPalette,
                                 --palette--;;filePalette'
                             ],
                             File::FILETYPE_IMAGE => [
                                 'showitem' => '
-                                --palette--;LLL:EXT:lang/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                                --palette--;;imageoverlayPalette,
                                 --palette--;;filePalette'
                             ],
                             File::FILETYPE_AUDIO => [
                                 'showitem' => '
-                                --palette--;LLL:EXT:lang/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.audioOverlayPalette;audioOverlayPalette,
+                                --palette--;;audioOverlayPalette,
                                 --palette--;;filePalette'
                             ],
                             File::FILETYPE_VIDEO => [
                                 'showitem' => '
-                                --palette--;LLL:EXT:lang/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.videoOverlayPalette;videoOverlayPalette,
+                                --palette--;;videoOverlayPalette,
                                 --palette--;;filePalette'
                             ],
                             File::FILETYPE_APPLICATION => [
                                 'showitem' => '
-                                --palette--;LLL:EXT:lang/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                                --palette--;;imageoverlayPalette,
                                 --palette--;;filePalette'
                             ]
                         ]
@@ -94,7 +94,7 @@ class ImageFieldTest extends FileFieldTest
      * @dataProvider validNameProvider
      * @param string $fieldName
      */
-    public function testThumbnail(string $fieldName)
+    public function testThumbnail(string $fieldName): void
     {
         $stubTable = new TableBuilderContext('stub_table', '1');
         $altFieldName = $fieldName . '_2';

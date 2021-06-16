@@ -37,7 +37,7 @@ class SelectFieldTest extends AbstractFieldTest
         ], $field->getColumns($stubTable));
     }
 
-    public function testItems()
+    public function testItems(): void
     {
         $stubTable = new TableBuilderContext('stub_table', '1');
 
@@ -57,7 +57,7 @@ class SelectFieldTest extends AbstractFieldTest
         ], $field->getColumns($stubTable)['some_field']['config']['items']);
     }
 
-    public function testValues()
+    public function testValues(): void
     {
         $stubTable = new TableBuilderContext('stub_table', '1');
 
@@ -71,7 +71,7 @@ class SelectFieldTest extends AbstractFieldTest
         ], $field->getColumns($stubTable)['some_field']['config']['items']);
     }
 
-    public function testRequired()
+    public function testRequired(): void
     {
         $stubTable = new TableBuilderContext('stub_table', '1');
 
@@ -87,7 +87,7 @@ class SelectFieldTest extends AbstractFieldTest
         ], $field->getColumns($stubTable)['some_field']['config']['items']);
     }
 
-    public function testItemProcType()
+    public function testItemProcType(): void
     {
         $stubTable = new TableBuilderContext('stub_table', '1');
 

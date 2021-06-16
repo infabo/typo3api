@@ -44,7 +44,7 @@ class InputFieldTest extends AbstractFieldTest
         ], $field->getColumns($stubTable));
     }
 
-    public static function differentSizeProvider()
+    public static function differentSizeProvider(): array
     {
         return [
             [10],
@@ -58,7 +58,7 @@ class InputFieldTest extends AbstractFieldTest
      * @dataProvider differentSizeProvider
      * @param int $size
      */
-    public function testDifferentSizes(int $size)
+    public function testDifferentSizes(int $size): void
     {
         $stubTable = new TableBuilderContext('stub_table', '1');
         $fieldName = 'test_field_1';
@@ -68,7 +68,7 @@ class InputFieldTest extends AbstractFieldTest
         $this->assertEquals("`$fieldName` VARCHAR($size) DEFAULT '' NOT NULL", $field->getDbTableDefinitions($stubTable)[$stubTable->getTableName()][0]);
     }
 
-    public function testDefault()
+    public function testDefault(): void
     {
         $stubTable = new TableBuilderContext('stub_table', '1');
         $fieldName = 'some_field';
@@ -85,7 +85,7 @@ class InputFieldTest extends AbstractFieldTest
         $this->assertEquals("`$fieldName` VARCHAR(50) DEFAULT '' NOT NULL", $field->getDbTableDefinitions($stubTable)[$stubTable->getTableName()][0]);
     }
 
-    public function testPlaceholder()
+    public function testPlaceholder(): void
     {
         $stubTable = new TableBuilderContext('stub_table', '1');
         $fieldName = 'some_field';

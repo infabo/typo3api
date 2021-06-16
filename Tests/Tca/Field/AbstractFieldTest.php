@@ -2,28 +2,28 @@
 
 namespace Typo3Api\Tca\Field;
 
-use PHPUnit\Framework\TestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use Typo3Api\Builder\Context\TableBuilderContext;
 
-class AbstractFieldTest extends TestCase
+class AbstractFieldTest extends UnitTestCase
 {
     const STUB_DB_TYPE = "VARCHAR(32) DEFAULT '' NOT NULL";
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (isset($GLOBALS['TCA'])) {
             unset($GLOBALS['TCA']);
         }
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         if (isset($GLOBALS['TCA'])) {
             unset($GLOBALS['TCA']);
         }
     }
 
-    public static function validNameProvider()
+    public static function validNameProvider(): array
     {
         return [
             ['field_1', 'field_2'],
@@ -72,7 +72,7 @@ class AbstractFieldTest extends TestCase
     /**
      * @param AbstractField $field
      */
-    protected function assertBasicPalette(AbstractField $field)
+    protected function assertBasicPalette(AbstractField $field): void
     {
         $testTable = new TableBuilderContext('stub_table', '1');
         $this->assertEmpty($field->getPalettes($testTable));
@@ -81,7 +81,7 @@ class AbstractFieldTest extends TestCase
     /**
      * @param AbstractField $field
      */
-    protected function assertBasicShowItem(AbstractField $field)
+    protected function assertBasicShowItem(AbstractField $field): void
     {
         $testTable = new TableBuilderContext('stub_table', '1');
         $this->assertEquals($field->getName(), $field->getShowItemString($testTable));
@@ -103,7 +103,7 @@ class AbstractFieldTest extends TestCase
     /**
      * @dataProvider validNameProvider
      */
-    public function testBasicField($fieldName)
+    public function testBasicField($fieldName): void
     {
         $field = $this->createFieldInstance($fieldName);
 
@@ -114,7 +114,7 @@ class AbstractFieldTest extends TestCase
         $this->assertBasicDatabase($field);
     }
 
-    public static function invalidNameProvider()
+    public static function invalidNameProvider(): array
     {
         return [
             [''],
@@ -125,16 +125,16 @@ class AbstractFieldTest extends TestCase
     }
 
     /**
-     * @expectedException \Typo3Api\Exception\TcaFieldException
      * @dataProvider invalidNameProvider
      * @param mixed $name
      */
-    public function testInvalidName($name)
+    public function testInvalidName($name): void
     {
+        $this->expectException(\Typo3Api\Exception\TcaFieldException::class);
         $this->createFieldInstance($name);
     }
 
-    public static function nameAndLabelProvider()
+    public static function nameAndLabelProvider(): array
     {
         return [
             ['name', "Name"],
@@ -149,7 +149,7 @@ class AbstractFieldTest extends TestCase
      * @param string $name
      * @param string $expectedLabel
      */
-    public function testLabelGeneration(string $name, string $expectedLabel)
+    public function testLabelGeneration(string $name, string $expectedLabel): void
     {
         $field = $this->createFieldInstance($name);
         $this->assertEquals($expectedLabel, $field->getOption('label'));
@@ -189,7 +189,7 @@ class AbstractFieldTest extends TestCase
      * @dataProvider validNameProvider
      * @param string $fieldName
      */
-    public function testExclude(string $fieldName)
+    public function testExclude(string $fieldName): void
     {
         $stubTable = new TableBuilderContext('stub_table', '1');
 
@@ -237,7 +237,7 @@ class AbstractFieldTest extends TestCase
      * @dataProvider validNameProvider
      * @param string $fieldName
      */
-    public function testDisplayCondition(string $fieldName)
+    public function testDisplayCondition(string $fieldName): void
     {
         $stubTable = new TableBuilderContext('stub_table', '1');
 
@@ -253,7 +253,7 @@ class AbstractFieldTest extends TestCase
      * @dataProvider validNameProvider
      * @param string $fieldName
      */
-    public function testUseAsLabel(string $fieldName)
+    public function testUseAsLabel(string $fieldName): void
     {
         $stubTable = new TableBuilderContext('stub_table', '1');
         $field = $this->createFieldInstance($fieldName, ['useAsLabel' => true]);
@@ -281,7 +281,7 @@ class AbstractFieldTest extends TestCase
      * @dataProvider validNameProvider
      * @param string $fieldName
      */
-    public function testSearchField(string $fieldName)
+    public function testSearchField(string $fieldName): void
     {
         $stubTable = new TableBuilderContext('stub_table', '1');
 
@@ -305,7 +305,7 @@ class AbstractFieldTest extends TestCase
      * @dataProvider validNameProvider
      * @param string $fieldName
      */
-    public function testLabel(string $fieldName)
+    public function testLabel(string $fieldName): void
     {
         $stubTable = new TableBuilderContext('stub_table', '1');
 

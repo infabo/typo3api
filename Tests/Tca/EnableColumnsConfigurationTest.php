@@ -2,33 +2,24 @@
 
 namespace Typo3Api\Tca;
 
-use PHPUnit\Framework\TestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use Typo3Api\Builder\TableBuilder;
 use Typo3Api\Hook\SqlSchemaHookUtil;
 use Typo3Api\PreparationForTypo3;
 
-class EnableColumnsConfigurationTest extends TestCase
+class EnableColumnsConfigurationTest extends UnitTestCase
 {
     use PreparationForTypo3;
     use SqlSchemaHookUtil;
 
-    public function testConfigure()
+    public function testConfigure(): void
     {
         TableBuilder::create('test_table')
             ->configure(new EnableColumnsConfiguration())
         ;
 
         $sql = [
-            "test_table" => array_merge(
-                BaseConfigurationTest::BASE_SQL,
-                [
-                    "hidden tinyint(1) DEFAULT '0' NOT NULL",
-                    "starttime int(11) unsigned DEFAULT '0' NOT NULL",
-                    "endtime int(11) unsigned DEFAULT '0' NOT NULL",
-                    "fe_group varchar(100) DEFAULT '0' NOT NULL",
-                    "editlock tinyint(1) DEFAULT '0' NOT NULL",
-                ]
-            )
+            "test_table" => BaseConfigurationTest::BASE_SQL
         ];
 
         $this->assertEquals(array_replace_recursive(

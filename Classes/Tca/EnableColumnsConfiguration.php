@@ -64,7 +64,9 @@ class EnableColumnsConfiguration implements TcaConfigurationInterface, DefaultTa
 
     public function getDbTableDefinitions(TableBuilderContext $tableBuilder): array
     {
-        return [];
+        return [
+            $tableBuilder->getTableName() => []
+        ];
     }
 
     public function getDefaultTab(): string

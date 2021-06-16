@@ -2,28 +2,17 @@
 
 namespace Typo3Api\Tca;
 
-use PHPUnit\Framework\TestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use Typo3Api\Builder\TableBuilder;
 use Typo3Api\Hook\SqlSchemaHookUtil;
 use Typo3Api\PreparationForTypo3;
 
-class BaseConfigurationTest extends TestCase
+class BaseConfigurationTest extends UnitTestCase
 {
     use PreparationForTypo3;
     use SqlSchemaHookUtil;
 
-    const BASE_SQL = [
-        "uid int(11) NOT NULL auto_increment",
-        "PRIMARY KEY (uid)",
-        "pid INT(11) NOT NULL DEFAULT '0'",
-        "INDEX pid (pid)",
-
-        "deleted TINYINT(1) DEFAULT '0' NOT NULL",
-        "tstamp INT(11) DEFAULT '0' NOT NULL",
-        "crdate INT(11) DEFAULT '0' NOT NULL",
-        "cruser_id INT(11) DEFAULT '0' NOT NULL",
-        "origUid INT(11) DEFAULT '0' NOT NULL",
-    ];
+    const BASE_SQL = [];
 
     const BASE_TCA = [
         'ctrl' => [
@@ -52,7 +41,7 @@ class BaseConfigurationTest extends TestCase
         'palettes' => [],
     ];
 
-    public function testConfiguration()
+    public function testConfiguration(): void
     {
         TableBuilder::create('test_table');
         // the base configuration is applied automatically

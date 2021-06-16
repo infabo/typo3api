@@ -2,16 +2,16 @@
 
 namespace Typo3Api\Utility;
 
-use PHPUnit\Framework\TestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-class ForeignTableUtilityTest extends TestCase
+class ForeignTableUtilityTest extends UnitTestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($GLOBALS['TCA']);
     }
 
-    public static function cases()
+    public static function cases(): array
     {
         return [
             'nothing' => [
@@ -79,7 +79,7 @@ class ForeignTableUtilityTest extends TestCase
      *
      * @dataProvider cases
      */
-    public function testNormalization(array $tca, string $where, string $expect)
+    public function testNormalization(array $tca, string $where, string $expect): void
     {
         $GLOBALS['TCA']['table'] = $tca;
         $this->assertEquals($expect, ForeignTableUtility::normalizeForeignTableWhere('table', $where));
