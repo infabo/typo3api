@@ -31,6 +31,7 @@
 		"symfony/intl": "^5",
 		"symfony/options-resolver": "^5",
 		"symfony/polyfill-mbstring": "^1",
+		"symfony/polyfill-php80": "^1.23.0",
 		"typo3/cms-backend": "^10.4",
 		"typo3/cms-core": "^10.4",
 		"typo3/cms-extbase": "^10.4",
