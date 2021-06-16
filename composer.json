@@ -46,7 +46,6 @@
 	"require-dev": {
 		"friendsoftypo3/phpstan-typo3": "^0.8.1",
 		"symplify/easy-coding-standard": "^9.3",
-		"typo3/cms-composer-installers": ">=1.4",
 		"typo3/testing-framework": "^6.8"
 	},
 	"autoload-dev": {
