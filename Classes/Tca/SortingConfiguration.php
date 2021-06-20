@@ -38,7 +38,9 @@ class SortingConfiguration implements TcaConfigurationInterface
     public function getDbTableDefinitions(TableBuilderContext $tableBuilder): array
     {
         return [
-            $tableBuilder->getTableName() => []
+            $tableBuilder->getTableName() => [
+                "sorting int(11) DEFAULT '0' NOT NULL",
+            ]
         ];
     }
 }
