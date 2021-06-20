@@ -182,6 +182,10 @@ class InlineRelationField extends AbstractField
             // sorting is always local to the pid so putting that in the index might help a lot
             $tableDefinitions[$foreignTable][] = "INDEX sorting (pid, {$foreignTableDefinition['ctrl']['sortby']})";
         }
+        if(@$foreignTableDefinition['ctrl']['_sortby'] !== null) {
+            // sorting is always local to the pid so putting that in the index might help a lot
+            $tableDefinitions[$foreignTable][] = "INDEX sorting_alt (pid, {$foreignTableDefinition['ctrl']['_sortby']})";
+        }
 
         return $tableDefinitions;
     }
