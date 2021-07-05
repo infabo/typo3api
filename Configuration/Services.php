@@ -21,6 +21,6 @@ return function (ContainerConfigurator $configurator): void {
     $services->set(\Typo3Api\EventListener\RegisterWizard::class)
         ->tag('event.listener', [
             'identifier' => 'typo3api-builder/register-wizard',
-            'event' => \TYPO3\CMS\Core\Configuration\Event\AfterTcaCompilationEvent::class
+            'event' => \TYPO3\CMS\Core\Configuration\Event\ModifyLoadedPageTsConfigEvent::class
         ]);
 };

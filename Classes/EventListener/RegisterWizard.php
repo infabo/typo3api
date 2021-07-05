@@ -4,20 +4,19 @@ declare(strict_types=1);
 
 namespace Typo3Api\EventListener;
 
-use TYPO3\CMS\Core\Configuration\Event\AfterTcaCompilationEvent;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Configuration\Event\ModifyLoadedPageTsConfigEvent;
 
 class RegisterWizard
 {
-    public function __invoke(AfterTcaCompilationEvent $event): void
+    public function __invoke(ModifyLoadedPageTsConfigEvent $event): void
     {
-        if (!isset($event->getTca()['tt_content']['ctrl']['EXT']['typo3api']['content_elements'])) {
+        if (!isset($GLOBALS['TCA']['tt_content']['ctrl']['EXT']['typo3api']['content_elements'])) {
             return;
         }
 
-        foreach ($event->getTca()['tt_content']['ctrl']['EXT']['typo3api']['content_elements'] as $section => $contentElements) {
+        foreach ($GLOBALS['TCA']['tt_content']['ctrl']['EXT']['typo3api']['content_elements'] as $section => $contentElements) {
             foreach ($contentElements as $contentElement) {
-                ExtensionManagementUtility::addPageTSConfig(
+                $event->addTsConfig(
                     <<<EOD
 mod.wizards.newContentElement.wizardItems.{$section} {
   elements {
