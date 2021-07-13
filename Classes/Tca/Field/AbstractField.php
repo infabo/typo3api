@@ -68,6 +68,7 @@ abstract class AbstractField implements TcaConfigurationInterface
                 $splitName = preg_replace(['/([A-Z])/', '/[_\s]+/'], ['_$1', ' '], $options['name']);
                 return ucfirst(strtolower(trim($splitName)));
             },
+            'description' => '',
             'exclude' => false,
             'localize' => true,
             'displayCond' => null,
@@ -79,6 +80,7 @@ abstract class AbstractField implements TcaConfigurationInterface
 
         $resolver->setAllowedTypes('name', 'string');
         $resolver->setAllowedTypes('label', 'string');
+        $resolver->setAllowedTypes('description', 'string');
         $resolver->setAllowedTypes('exclude', 'bool');
         $resolver->setAllowedTypes('dbType', 'string');
         $resolver->setAllowedTypes('localize', 'bool');
@@ -164,6 +166,7 @@ abstract class AbstractField implements TcaConfigurationInterface
     {
         $column = [
             'label' => $this->getOption('label'),
+            'description' => $this->getOption('description'),
             'config' => $this->getFieldTcaConfig($tcaBuilder),
         ];
 
