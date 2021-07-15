@@ -15,7 +15,7 @@ class CheckboxField extends AbstractField
         parent::configureOptions($resolver);
         $resolver->setDefaults([
             'checkbox_label' => 'Enabled',
-            'default' => 0,
+            'default' => false,
             'dbType' => function (Options $options) {
                 $default = $options['default'] ? '1' : '0';
                 return "TINYINT(1) DEFAULT '$default' NOT NULL";
@@ -31,7 +31,7 @@ class CheckboxField extends AbstractField
     {
         return [
             'type' => 'check',
-            'default' => $this->getOption('default'),
+            'default' => (int)$this->getOption('default'),
             'items' => [
                 [$this->getOption('checkbox_label'), '']
             ]
