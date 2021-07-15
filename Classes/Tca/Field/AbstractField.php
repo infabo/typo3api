@@ -68,6 +68,7 @@ abstract class AbstractField implements TcaConfigurationInterface
                 $splitName = preg_replace(['/([A-Z])/', '/[_\s]+/'], ['_$1', ' '], $options['name']);
                 return ucfirst(strtolower(trim($splitName)));
             },
+            'description' => '',
             'exclude' => false,
             'localize' => true,
             'displayCond' => null,
