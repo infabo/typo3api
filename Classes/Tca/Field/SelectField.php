@@ -56,6 +56,8 @@ class SelectField extends AbstractField
                 return "VARCHAR($maxChars) DEFAULT '$defaultValue' NOT NULL";
             },
 
+            'default' => '',
+
             // it doesn't make sense to localize selects (most of the time)
             'localize' => false
         ]);
@@ -64,6 +66,7 @@ class SelectField extends AbstractField
         $resolver->setAllowedTypes('items', 'array');
         $resolver->setAllowedTypes('itemsProcFunc', ['null', 'string']);
         $resolver->setAllowedTypes('required', 'bool');
+        $resolver->setAllowedTypes('default', 'string');
 
         $resolver->setNormalizer('items', function (Options $options, $items) {
             // ensure at least one value, or an empty value if not required
@@ -112,6 +115,7 @@ class SelectField extends AbstractField
             'type' => 'select',
             'renderType' => 'selectSingle',
             'items' => $this->getOption('items'),
+            'default' => $this->getOption('default'),
         ];
 
         if ($this->getOption('itemsProcFunc') !== null) {
