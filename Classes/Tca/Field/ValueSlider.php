@@ -25,8 +25,8 @@ class ValueSlider extends IntField
     {
         $config = parent::getFieldTcaConfig($tcaBuilder);
         $config['slider'] = [
-            'lower' => $this->getOption('step'),
-            'upper' => $this->getOption('width')
+            'step' => $this->getOption('step'),
+            'width' => $this->getOption('width')
         ];
         return $config;
     }
