@@ -15,15 +15,15 @@ use Typo3Api\Builder\Context\TcaBuilderContext;
 class CompoundTcaConfiguration implements TcaConfigurationInterface, \IteratorAggregate
 {
     /**
-     * This field is protected so extending implementations can access it.
-     *
-     * @var TcaConfigurationInterface[]
+     * @param TcaConfigurationInterface[] $children
      */
-    protected array $children;
-
-    public function __construct(array $children = [])
+    public function __construct(
+        /**
+         * This field is protected so extending implementations can access it.
+         */
+        protected array $children = []
+    )
     {
-        $this->children = $children;
     }
 
     /**

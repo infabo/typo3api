@@ -55,20 +55,13 @@ class ContentElementConfiguration implements TcaConfigurationInterface
         'no_sub' => '--palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:palette.header;header',
         'hidden' => 'header;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:header.ALT.html_formlabel',
     ];
-
-    /**
-     * @var array
-     */
-    private array $options;
     /**
      * @var OptionsResolver
      */
     private OptionsResolver $optionsResolver;
 
-    public function __construct(array $options = [])
+    public function __construct(private array $options = [])
     {
-        $this->options = $options;
-
         $this->optionsResolver = new OptionsResolver();
         $this->optionsResolver->setDefaults([
             'name' => fn(Options $options) => ucfirst(strtr($options['typeName'], '_', ' ')),

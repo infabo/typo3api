@@ -11,8 +11,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class CacheTagHook
 {
     /**
-     * @param array $params
-     *
      * @throws NoSuchCacheGroupException
      */
     public function clearCachePostProcess(array $params): void

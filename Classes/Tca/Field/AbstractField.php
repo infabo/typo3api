@@ -27,8 +27,6 @@ abstract class AbstractField implements TcaConfigurationInterface
 
     /**
      * CommonField constructor.
-     * @param string $name
-     * @param array $options
      */
     final public function __construct(string $name, array $options = [])
     {
@@ -47,13 +45,13 @@ abstract class AbstractField implements TcaConfigurationInterface
 
     private function getOptionResolver()
     {
-        if (isset(self::$optionResolvers[get_class($this)])) {
-            return self::$optionResolvers[get_class($this)];
+        if (isset(self::$optionResolvers[static::class])) {
+            return self::$optionResolvers[static::class];
         }
 
         $optionResolver = new OptionsResolver();
         $this->configureOptions($optionResolver);
-        self::$optionResolvers[get_class($this)] = $optionResolver;
+        self::$optionResolvers[static::class] = $optionResolver;
         return $optionResolver;
     }
 

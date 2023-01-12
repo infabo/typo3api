@@ -13,18 +13,12 @@ use Typo3Api\Tca\NamedPalette;
 class Address extends NamedPalette
 {
     /**
-     * @var array
-     */
-    protected array $options;
-
-    /**
      * @var string
      */
     protected $prefix;
 
-    public function __construct(string $name = 'Address', array $options = [])
+    public function __construct(string $name = 'Address', protected array $options = [])
     {
-        $this->options = $options;
         $this->prefix = $options['prefix'] ?? strtolower(preg_replace('#\W+#', '_', $name));
         parent::__construct($name, $this->getFields());
     }

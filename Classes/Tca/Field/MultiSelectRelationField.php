@@ -127,11 +127,6 @@ class MultiSelectRelationField extends AbstractField
         return $dbTableDefinitions;
     }
 
-    /**
-     * @param TableBuilderContext $tableBuilder
-     *
-     * @return string
-     */
     protected function getMnTableName(TableBuilderContext $tableBuilder): string
     {
         return $tableBuilder->getTableName() . '_' . $this->getOption('name') . '_mm';

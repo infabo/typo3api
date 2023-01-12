@@ -15,20 +15,8 @@ use Typo3Api\Builder\Context\TcaBuilderContext;
  */
 class CacheTagConfiguration implements TcaConfigurationInterface
 {
-    /**
-     * @var string
-     */
-    private string $tag;
-
-    /**
-     * @var string
-     */
-    private string $group;
-
-    public function __construct(string $tag, string $group = 'pages')
+    public function __construct(private string $tag, private string $group = 'pages')
     {
-        $this->tag = $tag;
-        $this->group = $group;
     }
 
     public function modifyCtrl(array &$ctrl, TcaBuilderContext $tcaBuilder)
