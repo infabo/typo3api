@@ -34,7 +34,7 @@ class SelectField extends AbstractField
             'required' => true, // TODO i somehow want this to be false now since having an empty option is nice
 
             'dbType' => function (Options $options) {
-                $possibleValues = static::getValuesFromItems($options['items']);
+                $possibleValues = self::getValuesFromItems($options['items']);
                 $defaultValue = addslashes(reset($possibleValues));
 
                 $minimumChars = $options['itemsProcFunc'] ? 30 : 1;
