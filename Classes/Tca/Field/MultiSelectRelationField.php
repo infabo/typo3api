@@ -47,9 +47,7 @@ class MultiSelectRelationField extends AbstractField
             return $foreignTable;
         });
 
-        $resolver->setNormalizer('foreign_table_where', function (Options $options, string $where) {
-            return ForeignTableUtility::normalizeForeignTableWhere($options['foreign_table'], $where);
-        });
+        $resolver->setNormalizer('foreign_table_where', fn(Options $options, string $where) => ForeignTableUtility::normalizeForeignTableWhere($options['foreign_table'], $where));
 
         $resolver->setNormalizer('minitems', function (Options $options, $minItems) {
             if ($minItems < 0) {

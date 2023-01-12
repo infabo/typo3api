@@ -24,14 +24,10 @@ class FileField extends AbstractField
             'minitems' => 0,
             'maxitems' => 100,
             'collapseAll' => true,
-            'allowHide' => function (Options $options) {
-                // if you define minitems, you'd expect there to be at least one item.
-                // however: hiding elements will prevent this so i just decided to disable hiding by default then.
-                return $options['minitems'] === 0;
-            },
-            'dbType' => function (Options $options) {
-                return DbFieldDefinition::getIntForNumberRange(0, $options['maxitems']);
-            },
+            'allowHide' => fn(Options $options) => // if you define minitems, you'd expect there to be at least one item.
+// however: hiding elements will prevent this so i just decided to disable hiding by default then.
+$options['minitems'] === 0,
+            'dbType' => fn(Options $options) => DbFieldDefinition::getIntForNumberRange(0, $options['maxitems']),
         ]);
 
         $resolver->setAllowedTypes('allowedFileExtensions', ['string', 'array']);

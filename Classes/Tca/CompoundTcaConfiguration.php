@@ -85,8 +85,6 @@ class CompoundTcaConfiguration implements TcaConfigurationInterface, \IteratorAg
 
     public function getShowItemString(TcaBuilderContext $tcaBuilder): string
     {
-        return implode(',', array_map(static function (TcaConfigurationInterface $configuration) use ($tcaBuilder) {
-            return $configuration->getShowItemString($tcaBuilder);
-        }, $this->children));
+        return implode(',', array_map(static fn(TcaConfigurationInterface $configuration) => $configuration->getShowItemString($tcaBuilder), $this->children));
     }
 }

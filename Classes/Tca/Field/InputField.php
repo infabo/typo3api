@@ -21,9 +21,7 @@ class InputField extends AbstractField
             // also: the limit of 255 feels random for a normal human
             // that's why i use 50 as a default
             'max' => 50,
-            'size' => function (Options $options) {
-                return $options['max'];
-            },
+            'size' => fn(Options $options) => $options['max'],
             'default' => '',
             'placeholder' => null,
             'required' => false,
@@ -50,9 +48,7 @@ class InputField extends AbstractField
                 // I opted to prevent large input fields and by default add everything to searchFields
                 // also, i can easily use the default option here which is nice.
             },
-            'index' => function (Options $options) {
-                return $options['unique'];
-            },
+            'index' => fn(Options $options) => $options['unique'],
             'useAsLabel' => true,
             'searchField' => true,
         ]);

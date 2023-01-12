@@ -24,13 +24,11 @@ class SelectField extends AbstractField
             'values' => [],
             // items is the normal typo3 compatible item list
             // if not defined, it will be generated from the value list
-            'items' => function (Options $options) {
-                return array_map(static function ($value) {
-                    $label = preg_replace(['/([A-Z])/', '/[_\s]+/'], ['_$1', ' '], $value);
-                    $label = ucfirst(strtolower(trim($label)));
-                    return [$label, $value];
-                }, $options['values']);
-            },
+            'items' => fn(Options $options) => array_map(static function ($value) {
+                $label = preg_replace(['/([A-Z])/', '/[_\s]+/'], ['_$1', ' '], $value);
+                $label = ucfirst(strtolower(trim($label)));
+                return [$label, $value];
+            }, $options['values']),
             'itemsProcFunc' => null,
 
             'required' => true, // TODO i somehow want this to be false now since having an empty option is nice

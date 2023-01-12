@@ -71,12 +71,8 @@ class ContentElementConfiguration implements TcaConfigurationInterface
 
         $this->optionsResolver = new OptionsResolver();
         $this->optionsResolver->setDefaults([
-            'name' => function (Options $options) {
-                return ucfirst(strtr($options['typeName'], '_', ' '));
-            },
-            'description' => function (Options $options) {
-                return $options['typeName'];
-            },
+            'name' => fn(Options $options) => ucfirst(strtr($options['typeName'], '_', ' ')),
+            'description' => fn(Options $options) => $options['typeName'],
             'icon' => function (Options $options) {
                 $icons = array_map(static function ($icon) use ($options) {
                     $name = basename($icon, '.svg');

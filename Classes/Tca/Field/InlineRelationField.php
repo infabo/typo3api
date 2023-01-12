@@ -27,13 +27,9 @@ class InlineRelationField extends AbstractField
             'foreignTakeover' => true,
             'minitems' => 0,
             'maxitems' => 100, // at some point, inline record editing doesn't make sense anymore
-            'collapseAll' => function (Options $options) {
-                return $options['maxitems'] > 5;
-            },
+            'collapseAll' => fn(Options $options) => $options['maxitems'] > 5,
 
-            'dbType' => function (Options $options) {
-                return DbFieldDefinition::getIntForNumberRange(0, $options['maxitems']);
-            },
+            'dbType' => fn(Options $options) => DbFieldDefinition::getIntForNumberRange(0, $options['maxitems']),
         ]);
 
         $resolver->setAllowedTypes('foreign_table', ['string', TableBuilder::class]);

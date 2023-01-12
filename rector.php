@@ -6,6 +6,7 @@ use Rector\Config\RectorConfig;
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
 use Rector\PostRector\Rector\NameImportingPostRector;
+use Rector\Set\ValueObject\SetList;
 use Ssch\TYPO3Rector\Configuration\Typo3Option;
 use Ssch\TYPO3Rector\Rector\General\ConvertImplicitVariablesToExplicitGlobalsRector;
 use Ssch\TYPO3Rector\Rector\General\ExtEmConfRector;
@@ -19,10 +20,13 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->sets([
         Typo3LevelSetList::UP_TO_TYPO3_11,
+        SetList::PHP_74
     ]);
 
     // Define your target version which you want to support
     $rectorConfig->phpVersion(PhpVersion::PHP_81);
+
+    $rectorConfig->importShortClasses(false);
 
     // If you only want to process one/some TYPO3 extension(s), you can specify its path(s) here.
     // If you use the option --config change __DIR__ to getcwd()

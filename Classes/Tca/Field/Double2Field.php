@@ -15,7 +15,7 @@ class Double2Field extends AbstractField
         parent::configureOptions($resolver);
         $resolver->setDefaults([
             'min' => 0.0,
-            'max' => 1000000.0, // default up to a million
+            'max' => 1_000_000.0, // default up to a million
             'size' => function (Options $options) {
                 /**
                  * @phpstan-ignore-next-line
@@ -23,10 +23,8 @@ class Double2Field extends AbstractField
                 $preDecimalSize = max(strlen((string)(int)$options['min']), strlen((string)(int)$options['max']));
                 return $preDecimalSize + 3; // point + 2 digits after the point
             },
-            'default' => function (Options $options) {
-                // try to get default as close to 0 as possible
-                return max($options['min'], min($options['max'], 0.0));
-            },
+            'default' => fn(Options $options) => // try to get default as close to 0 as possible
+max($options['min'], min($options['max'], 0.0)),
             'required' => false, // TODO required is kind of useless on an int
 
             'dbType' => function (Options $options) {

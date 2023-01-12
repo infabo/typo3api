@@ -41,7 +41,7 @@ abstract class AbstractField implements TcaConfigurationInterface
             $this->options = $optionResolver->resolve($options);
         } catch (InvalidOptionsException $e) {
             $this->options = ['name' => $name]; // make getName work for the exception
-            throw new TcaFieldException($this, $e->getMessage(), 1508678194, $e);
+            throw new TcaFieldException($this, $e->getMessage(), 1_508_678_194, $e);
         }
     }
 

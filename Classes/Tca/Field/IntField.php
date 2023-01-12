@@ -16,14 +16,10 @@ class IntField extends AbstractField
         parent::configureOptions($resolver);
         $resolver->setDefaults([
             'min' => 0,
-            'max' => 1000000, // default up to a million
-            'size' => function (Options $options) {
-                return max(strlen((string)$options['min']), strlen((string)$options['max']));
-            },
-            'default' => function (Options $options) {
-                // try to get default as close to 0 as possible
-                return max($options['min'], min($options['max'], 0));
-            },
+            'max' => 1_000_000, // default up to a million
+            'size' => fn(Options $options) => max(strlen((string)$options['min']), strlen((string)$options['max'])),
+            'default' => fn(Options $options) => // try to get default as close to 0 as possible
+max($options['min'], min($options['max'], 0)),
             'required' => false, // TODO required is kind of useless on an int since the backend doesn't allow en empty value
 
             'dbType' => function (Options $options) {

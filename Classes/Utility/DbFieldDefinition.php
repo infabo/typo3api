@@ -25,12 +25,12 @@ class DbFieldDefinition
                 return "SMALLINT(5) UNSIGNED DEFAULT '$default' NOT NULL";
             }
 
-            if ($high <= 16777215) {
+            if ($high <= 16_777_215) {
                 return "MEDIUMINT(8) UNSIGNED DEFAULT '$default' NOT NULL";
             }
 
             // the compare alone might already cause problems with 32bit php... might need to investigate
-            if ($high <= 4294967295) {
+            if ($high <= 4_294_967_295) {
                 return "INT(10) UNSIGNED DEFAULT '$default' NOT NULL";
             }
         } else {
@@ -42,11 +42,11 @@ class DbFieldDefinition
                 return "SMALLINT(6) DEFAULT '$default' NOT NULL";
             }
 
-            if ($low >= -8388608 && $high <= 8388607) {
+            if ($low >= -8_388_608 && $high <= 8_388_607) {
                 return "MEDIUMINT(8) DEFAULT '$default' NOT NULL";
             }
 
-            if ($low >= -2147483648 && $high <= 2147483647) {
+            if ($low >= -2_147_483_648 && $high <= 2_147_483_647) {
                 return "INT(11) DEFAULT '$default' NOT NULL";
             }
         }

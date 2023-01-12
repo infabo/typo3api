@@ -42,9 +42,7 @@ class SelectRelationField extends AbstractField
             return $foreignTable;
         });
 
-        $resolver->setNormalizer('foreign_table_where', function (Options $options, string $where) {
-            return ForeignTableUtility::normalizeForeignTableWhere($options['foreign_table'], $where);
-        });
+        $resolver->setNormalizer('foreign_table_where', fn(Options $options, string $where) => ForeignTableUtility::normalizeForeignTableWhere($options['foreign_table'], $where));
 
         $resolver->setNormalizer('items', function (Options $options, array $items) {
             // ensure at least one value, or an empty value if not required
