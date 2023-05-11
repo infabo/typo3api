@@ -44,7 +44,6 @@ class LanguageConfiguration implements TcaConfigurationInterface, DefaultTabInte
                 ]
             ],
             'l18n_parent' => [
-                'exclude' => false,
                 'displayCond' => 'FIELD:sys_language_uid:>:0',
                 'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
                 'config' => [
