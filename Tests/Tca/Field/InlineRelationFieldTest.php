@@ -70,7 +70,6 @@ class InlineRelationFieldTest extends AbstractFieldTest
                     'maxitems' => 100,
                     'behaviour' => [
                         'enableCascadingDelete' => true,
-                        'localizeChildrenAtParentLocalization' => false,
                     ],
                     'appearance' => [
                         'collapseAll' => 1,

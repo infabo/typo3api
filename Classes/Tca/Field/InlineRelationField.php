@@ -120,7 +120,6 @@ class InlineRelationField extends AbstractField
             'maxitems' => $this->getOption('maxitems'),
             'behaviour' => [
                 'enableCascadingDelete' => $this->getOption('foreignTakeover'),
-                'localizeChildrenAtParentLocalization' => $canLocalize
             ],
             'appearance' => [
                 'collapseAll' => $this->getOption('collapseAll') ? 1 : 0,
