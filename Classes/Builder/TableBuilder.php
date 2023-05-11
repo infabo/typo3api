@@ -220,9 +220,6 @@ class TableBuilder implements TcaBuilderInterface
 
         $GLOBALS['TCA'][$this->getTableName()] = [
             'ctrl' => [],
-            'interface' => [
-                'showRecordFieldList' => '',
-            ],
             'columns' => [],
             'types' => [],
             'palettes' => [],

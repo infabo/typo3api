@@ -31,9 +31,6 @@ class BaseConfigurationTest extends UnitTestCase
                 ]
             ]
         ],
-        'interface' => [
-            'showRecordFieldList' => '',
-        ],
         'columns' => [],
         'types' => [
             '1' => []
