@@ -28,7 +28,6 @@ class MultiSelectRelationField extends AbstractField
             'minitems' => 0,
             'maxitems' => 100,
             'size' => 7,
-            'enableSearch' => true,
 
             'dbType' => "INT(11) DEFAULT '0' NOT NULL",
             'localize' => false,
@@ -86,7 +85,6 @@ class MultiSelectRelationField extends AbstractField
             'size' => $this->getOption('size'),
             'minitems' => $this->getOption('minitems'),
             'maxitems' => $this->getOption('maxitems'),
-            'enableMultiSelectFilterTextfield' => $this->getOption('enableSearch'),
         ];
     }
 
