@@ -126,7 +126,6 @@ class InlineRelationField extends AbstractField
                 'collapseAll' => $this->getOption('collapseAll') ? 1 : 0,
                 'useSortable' => $canBeSorted,
                 'showPossibleLocalizationRecords' => $canLocalize,
-                'showRemovedLocalizationRecords' => $canLocalize,
                 'showAllLocalizationLink' => $canLocalize,
                 'showSynchronizationLink' => $canLocalize, // potentially dangerous...
                 'enabledControls' => [

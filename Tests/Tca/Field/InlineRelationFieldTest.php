@@ -76,7 +76,6 @@ class InlineRelationFieldTest extends AbstractFieldTest
                         'collapseAll' => 1,
                         'useSortable' => false,
                         'showPossibleLocalizationRecords' => false,
-                        'showRemovedLocalizationRecords' => false,
                         'showAllLocalizationLink' => false,
                         'showSynchronizationLink' => false,
                         'enabledControls' => [
