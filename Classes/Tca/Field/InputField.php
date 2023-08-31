@@ -42,7 +42,7 @@ class InputField extends AbstractField
                     throw new InvalidOptionsException($msg);
                 }
 
-                $default = addslashes($options['default']);
+                $default = addslashes((string) $options['default']);
                 return "VARCHAR($maxCharacters) DEFAULT '$default' NOT NULL";
             // using anything but varchar here would make searchFields slow.
                 // I opted to prevent large input fields and by default add everything to searchFields

@@ -63,7 +63,7 @@ abstract class AbstractField implements TcaConfigurationInterface
         ]);
         $resolver->setDefaults([
             'label' => function (Options $options) {
-                $splitName = preg_replace(['/([A-Z])/', '/[_\s]+/'], ['_$1', ' '], $options['name']);
+                $splitName = preg_replace(['/([A-Z])/', '/[_\s]+/'], ['_$1', ' '], (string) $options['name']);
                 return ucfirst(strtolower(trim($splitName)));
             },
             'description' => '',
@@ -134,7 +134,7 @@ abstract class AbstractField implements TcaConfigurationInterface
             } else {
                 if (!isset($ctrl['label_alt'])) {
                     $ctrl['label_alt'] = $fieldName;
-                } elseif (!str_contains($ctrl['label_alt'], $fieldName)) {
+                } elseif (!str_contains((string) $ctrl['label_alt'], (string) $fieldName)) {
                     $ctrl['label_alt'] .= ', ' . $fieldName;
                 }
             }
@@ -143,7 +143,7 @@ abstract class AbstractField implements TcaConfigurationInterface
         if ($this->getOption('searchField')) {
             if (!isset($ctrl['searchFields'])) {
                 $ctrl['searchFields'] = $fieldName;
-            } elseif (!str_contains($ctrl['searchFields'], $fieldName)) {
+            } elseif (!str_contains((string) $ctrl['searchFields'], (string) $fieldName)) {
                 $ctrl['searchFields'] .= ', ' . $fieldName;
             }
         }
@@ -198,7 +198,7 @@ abstract class AbstractField implements TcaConfigurationInterface
 
     public function getDbTableDefinitions(TableBuilderContext $tableBuilder): array
     {
-        $name = addslashes($this->getOption('name'));
+        $name = addslashes((string) $this->getOption('name'));
         $definition = [$tableBuilder->getTableName() => ["`$name` " . $this->getOption('dbType')]];
 
         if ($this->getOption('index')) {

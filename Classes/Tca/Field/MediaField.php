@@ -18,14 +18,14 @@ class MediaField extends FileField
      *
      * @see \Typo3Api\Tca\Field\ImageField::BLACKLISTED_FORMATS
      */
-    public const BLACKLISTED_FORMATS = ['wav', 'ogg', 'flac', 'opus', 'webm'];
+    final public const BLACKLISTED_FORMATS = ['wav', 'ogg', 'flac', 'opus', 'webm'];
 
     protected function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
         $resolver->setDefaults([
             'allowedFileExtensions' => array_diff(
-                GeneralUtility::trimExplode(',', strtolower($GLOBALS['TYPO3_CONF_VARS']['SYS']['mediafile_ext'])),
+                GeneralUtility::trimExplode(',', strtolower((string) $GLOBALS['TYPO3_CONF_VARS']['SYS']['mediafile_ext'])),
                 ImageField::BLACKLISTED_FORMATS,
                 self::BLACKLISTED_FORMATS
             ),

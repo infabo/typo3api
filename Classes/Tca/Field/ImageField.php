@@ -26,7 +26,7 @@ class ImageField extends FileField
      * pdf is like pandora's box ... with memory leaks, timeouts etc.
      * bmp files tend to be huge ~ you shouldn't accept those
      */
-    public const BLACKLISTED_FORMATS = ['svg', 'ai', 'pcx', 'tga', 'pdf', 'bmp'];
+    final public const BLACKLISTED_FORMATS = ['svg', 'ai', 'pcx', 'tga', 'pdf', 'bmp'];
 
     protected function configureOptions(OptionsResolver $resolver)
     {
@@ -34,7 +34,7 @@ class ImageField extends FileField
         $resolver->setDefaults([
             'useAsThumbnail' => true,
             'allowedFileExtensions' => array_diff(
-                GeneralUtility::trimExplode(',', strtolower($GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'])),
+                GeneralUtility::trimExplode(',', strtolower((string) $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'])),
                 self::BLACKLISTED_FORMATS
             ),
             'cropVariants' => null,

@@ -159,7 +159,7 @@ class InlineRelationField extends AbstractField
 
         // define the field on the other side
         // TODO somewhere it should be checked if this field is already defined
-        $foreignField = addslashes($this->getOption('foreign_field'));
+        $foreignField = addslashes((string) $this->getOption('foreign_field'));
         $foreignTable = $this->getOption('foreign_table');
 
         // for self referencing relations the foreign table key might already exist, otherwise create it

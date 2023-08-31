@@ -11,7 +11,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class ForeignTableUtility
 {
-    public const ORDER_BY_REGEX = '/(\s*)(ORDER BY(.*))?$/i';
+    final public const ORDER_BY_REGEX = '/(\s*)(ORDER BY(.*))?$/i';
 
     public static function normalizeForeignTableWhere(string $foreignTableName, string $where): string
     {

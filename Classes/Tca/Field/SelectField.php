@@ -35,7 +35,7 @@ class SelectField extends AbstractField
 
             'dbType' => function (Options $options) {
                 $possibleValues = self::getValuesFromItems($options['items']);
-                $defaultValue = addslashes(reset($possibleValues));
+                $defaultValue = addslashes((string) reset($possibleValues));
 
                 $minimumChars = $options['itemsProcFunc'] ? 30 : 1;
                 $maxChars = max($minimumChars, ...array_map('mb_strlen', $possibleValues));
@@ -75,7 +75,7 @@ class SelectField extends AbstractField
             foreach ($items as $value) {
                 // the documentation says these chars are invalid
                 // https://docs.typo3.org/typo3cms/TCAReference/ColumnsConfig/Type/Select.html#items
-                if (preg_match('/[|,;]/', $value[1])) {
+                if (preg_match('/[|,;]/', (string) $value[1])) {
                     throw new InvalidOptionsException("The value in an select must not contain the chars '|,;'.");
                 }
             }

@@ -11,7 +11,7 @@ class NamedPalette extends CompoundTcaConfiguration
     /**
      * @var string
      */
-    private string $name;
+    private readonly string $name;
 
     public function __construct(string $name, array $children = [])
     {
