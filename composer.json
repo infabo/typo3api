@@ -1,5 +1,5 @@
 {
-	"name": "infabo/typo3api",
+	"name": "halbkreativ/typo3api",
 	"type": "typo3-cms-extension",
 	"license": "MIT",
 	"keywords": [
@@ -11,7 +11,7 @@
 		"ext_localconf.php"
 	],
 	"support": {
-		"issues": "https://github.com/infabo/typo3api/issues"
+		"issues": "https://github.com/halbkreativ/typo3api/issues"
 	},
 	"authors": [
 		{
