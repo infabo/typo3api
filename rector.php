@@ -20,8 +20,10 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->sets([
         Typo3LevelSetList::UP_TO_TYPO3_11,
+        Typo3LevelSetList::UP_TO_TYPO3_12,
         SetList::PHP_74,
         SetList::PHP_80,
+        SetList::PHP_81
     ]);
 
     // Define your target version which you want to support

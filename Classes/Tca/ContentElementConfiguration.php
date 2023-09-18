@@ -11,7 +11,7 @@ use Typo3Api\Builder\Context\TcaBuilderContext;
 
 class ContentElementConfiguration implements TcaConfigurationInterface
 {
-    public const ICONS = [
+    final public const ICONS = [
         'content-accordion',
         'content-audio',
         'content-bullets',
@@ -50,7 +50,7 @@ class ContentElementConfiguration implements TcaConfigurationInterface
         'content-textpic',
     ];
 
-    public const HEADLINE = [
+    final public const HEADLINE = [
         'normal' => '--palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:palette.headers;headers',
         'no_sub' => '--palette--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:palette.header;header',
         'hidden' => 'header;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:header.ALT.html_formlabel',
@@ -58,9 +58,9 @@ class ContentElementConfiguration implements TcaConfigurationInterface
     /**
      * @var OptionsResolver
      */
-    private OptionsResolver $optionsResolver;
+    private readonly OptionsResolver $optionsResolver;
 
-    public function __construct(private array $options = [])
+    public function __construct(private readonly array $options = [])
     {
         $this->optionsResolver = new OptionsResolver();
         $this->optionsResolver->setDefaults([

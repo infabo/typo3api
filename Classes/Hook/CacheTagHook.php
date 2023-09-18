@@ -26,7 +26,7 @@ class CacheTagHook
                 $tag = str_replace(
                     ['###UID###', '###PID###'],
                     [$params['uid'], $params['uid_page']],
-                    $tag
+                    (string) $tag
                 );
             }
 

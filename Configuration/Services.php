@@ -1,6 +1,10 @@
 <?php
 
 declare(strict_types=1);
+use Typo3Api\EventListener\SqlSchemaListener;
+use TYPO3\CMS\Core\Database\Event\AlterTableDefinitionStatementsEvent;
+use Typo3Api\EventListener\RegisterWizard;
+use TYPO3\CMS\Core\Configuration\Event\ModifyLoadedPageTsConfigEvent;
 
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
@@ -12,15 +16,15 @@ return function (ContainerConfigurator $configurator): void {
 
     $services->load('Typo3Api\\', '../Classes/*');
 
-    $services->set(\Typo3Api\EventListener\SqlSchemaListener::class)
+    $services->set(SqlSchemaListener::class)
         ->tag('event.listener', [
             'identifier' => 'typo3api-builder/sql-schema',
-            'event' => \TYPO3\CMS\Core\Database\Event\AlterTableDefinitionStatementsEvent::class
+            'event' => AlterTableDefinitionStatementsEvent::class
         ]);
 
-    $services->set(\Typo3Api\EventListener\RegisterWizard::class)
+    $services->set(RegisterWizard::class)
         ->tag('event.listener', [
             'identifier' => 'typo3api-builder/register-wizard',
-            'event' => \TYPO3\CMS\Core\Configuration\Event\ModifyLoadedPageTsConfigEvent::class
+            'event' => ModifyLoadedPageTsConfigEvent::class
         ]);
 };

@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+use PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer;
 
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\EasyCodingStandard\ValueObject\Option;
@@ -11,7 +12,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $containerConfigurator->import(SetList::CLEAN_CODE);
     $containerConfigurator->import(SetList::PSR_12);
     $parameters->set(Option::SKIP, [
-        \PhpCsFixer\Fixer\Strict\DeclareStrictTypesFixer::class => [
+        DeclareStrictTypesFixer::class => [
             'ext_localconf.php',
             'ext_tables.php',
         ]
