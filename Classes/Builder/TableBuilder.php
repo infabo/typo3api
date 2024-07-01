@@ -37,6 +37,8 @@ class TableBuilder implements TcaBuilderInterface
     /**
      * TableBuilder constructor.
      *
+     * @param string $tableName
+     * @param string $typeName
      *
      * @internal param string $name
      */
@@ -47,6 +49,8 @@ class TableBuilder implements TcaBuilderInterface
     }
 
     /**
+     * @param string $name
+     * @param string $typeName
      *
      * @return TableBuilder
      */
@@ -227,6 +231,10 @@ class TableBuilder implements TcaBuilderInterface
         return true;
     }
 
+    /**
+     * @param array $tca
+     * @param TcaConfigurationInterface $configuration
+     */
     protected function addPalettes(array &$tca, TcaConfigurationInterface $configuration): void
     {
         $palettes = $configuration->getPalettes($this->context);
@@ -245,6 +253,10 @@ class TableBuilder implements TcaBuilderInterface
         }
     }
 
+    /**
+     * @param array $tca
+     * @param TcaConfigurationInterface $configuration
+     */
     protected function addColumns(array &$tca, TcaConfigurationInterface $configuration): void
     {
         $columns = $configuration->getColumns($this->context);
@@ -303,6 +315,11 @@ class TableBuilder implements TcaBuilderInterface
         }
     }
 
+    /**
+     * @param array $tca
+     * @param TcaConfigurationInterface $configuration
+     * @param string $tab
+     */
     protected function addShowItemToTab(array &$tca, TcaConfigurationInterface $configuration, string $tab): void
     {
         if (!isset($tca['types'][$this->getTypeName()])) {
@@ -343,6 +360,11 @@ class TableBuilder implements TcaBuilderInterface
         }
     }
 
+    /**
+     * @param array $tca
+     * @param TcaConfigurationInterface $configuration
+     * @param string $position
+     */
     protected function addShowItemAtPosition(
         array &$tca,
         TcaConfigurationInterface $configuration,
