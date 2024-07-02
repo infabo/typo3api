@@ -25,8 +25,7 @@ trait PreparationForTypo3
     protected function setUp(): void
     {
         // load tt_content tca because it is used as a reference in many configurations
-        $GLOBALS['TYPO3_CONF_VARS'] = require __DIR__ . '/../web/typo3/sysext/core/Configuration/DefaultConfiguration.php';
-        $tca = require __DIR__ . '/../web/typo3/sysext/frontend/Configuration/TCA/tt_content.php';
+        $tca = require __DIR__ . '/../vendor/typo3/cms-frontend/Configuration/TCA/tt_content.php';
         if (is_array($tca)) {
             $GLOBALS['TCA']['tt_content'] = $tca;
         }

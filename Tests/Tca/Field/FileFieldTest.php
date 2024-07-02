@@ -30,6 +30,7 @@ class FileFieldTest extends AbstractFieldTest
                         'showSynchronizationLink' => true,
                         'enabledControls' => [
                             'localize' => true,
+                            'hide' => true,
                         ],
                     ],
                 ]),
@@ -81,9 +82,9 @@ class FileFieldTest extends AbstractFieldTest
         $testTable = new TableBuilderContext('stub_table', '1');
 
         $field = $this->createFieldInstance('field', ['allowedFileExtensions' => 'jpg, png']);
-        $this->assertEquals('jpg,png', $field->getColumns($testTable)['field']['config']['filter'][0]['parameters']['allowedFileExtensions']);
+        $this->assertEquals('jpg,png', $field->getColumns($testTable)['field']['config']['allowed']);
 
         $field = $this->createFieldInstance('field', ['allowedFileExtensions' => ['jpg', 'png']]);
-        $this->assertEquals('jpg,png', $field->getColumns($testTable)['field']['config']['filter'][0]['parameters']['allowedFileExtensions']);
+        $this->assertEquals('jpg,png', $field->getColumns($testTable)['field']['config']['allowed']);
     }
 }

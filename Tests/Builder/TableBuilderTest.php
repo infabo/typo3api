@@ -13,7 +13,6 @@ class TableBuilderTest extends UnitTestCase
     {
         TableBuilder::create('test_table');
         $this->assertArrayHasKey('ctrl', $GLOBALS['TCA']['test_table']);
-        $this->assertArrayHasKey('interface', $GLOBALS['TCA']['test_table']);
         $this->assertArrayHasKey('columns', $GLOBALS['TCA']['test_table']);
         $this->assertArrayHasKey('types', $GLOBALS['TCA']['test_table']);
         $this->assertArrayHasKey('palettes', $GLOBALS['TCA']['test_table']);

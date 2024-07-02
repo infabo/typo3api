@@ -34,7 +34,7 @@ class ImageFieldTest extends FileFieldTest
     {
         $stubTable = new TableBuilderContext('stub_table', '1');
 
-        $this->assertEquals([
+        $expectedColumns = [
             $field->getName() => [
                 'label' => $field->getOption('label'),
                 'config' => ExtensionManagementUtility::getFileFieldTCAConfig($field->getName(), [
@@ -47,7 +47,8 @@ class ImageFieldTest extends FileFieldTest
                         'showAllLocalizationLink' => true,
                         'showSynchronizationLink' => true,
                         'enabledControls' => [
-                            'localize' => true
+                            'localize' => true,
+                            'hide' => true,
                         ],
                     ],
                     'overrideChildTca' => [
@@ -86,7 +87,12 @@ class ImageFieldTest extends FileFieldTest
                     ]
                 ], 'gif,jpg,jpeg,tif,tiff,png')
             ]
-        ], $field->getColumns($stubTable));
+        ];
+
+
+        $actualColumns = $field->getColumns($stubTable);
+
+        $this->assertEquals($expectedColumns, $actualColumns);
     }
 
     /**

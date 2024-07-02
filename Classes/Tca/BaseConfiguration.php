@@ -20,7 +20,6 @@ class BaseConfiguration implements TcaConfigurationInterface
         $ctrl['delete'] = 'deleted';
         $ctrl['tstamp'] = 'tstamp';
         $ctrl['crdate'] = 'crdate';
-        $ctrl['cruser_id'] = 'cruser_id';
         $ctrl['origUid'] = 'origUid';
         $ctrl['label'] = 'uid';
     }

@@ -33,7 +33,9 @@ class CheckboxField extends AbstractField
             'type' => 'check',
             'default' => (int)$this->getOption('default'),
             'items' => [
-                [$this->getOption('checkbox_label'), '']
+                [
+                    'label' => $this->getOption('checkbox_label'),
+                ]
             ]
         ];
     }

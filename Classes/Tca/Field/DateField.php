@@ -15,7 +15,7 @@ class DateField extends AbstractField
         parent::configureOptions($resolver);
 
         $resolver->setDefaults([
-            'type' => 'date',
+            'type' => 'datetime',
 
             // in my tests, these 3 didn't work at all
 //            'default' => null,
@@ -75,10 +75,9 @@ class DateField extends AbstractField
     public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder): array
     {
         $config = [
-            'type' => 'input',
-            'renderType' => 'inputDateTime',
+            'type' => 'datetime',
+            'format' => 'date',
             'dbType' => $this->getOption('exposedDbType'),
-            'eval' => $this->getOption('type'),
             'range' => [],
         ];
 

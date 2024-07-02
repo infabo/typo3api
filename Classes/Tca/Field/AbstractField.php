@@ -74,6 +74,7 @@ abstract class AbstractField implements TcaConfigurationInterface
             'searchField' => false,
             'useForRecordType' => false,
             'index' => false,
+            'required' => false,
         ]);
 
         $resolver->setAllowedTypes('name', 'string');
@@ -87,6 +88,7 @@ abstract class AbstractField implements TcaConfigurationInterface
         $resolver->setAllowedTypes('searchField', 'bool');
         $resolver->setAllowedTypes('useForRecordType', 'bool');
         $resolver->setAllowedTypes('index', 'bool');
+        $resolver->setAllowedTypes('required', 'bool');
 
         /** @noinspection PhpUnusedParameterInspection */
         $resolver->setNormalizer('name', function (Options $options, $name) {
@@ -182,6 +184,10 @@ abstract class AbstractField implements TcaConfigurationInterface
 
         if ($this->getOption('displayCond') !== null) {
             $column['displayCond'] = $this->getOption('displayCond');
+        }
+
+        if ($this->getOption('required')) {
+            $column['config']['required'] = $this->getOption('required');
         }
 
         return [

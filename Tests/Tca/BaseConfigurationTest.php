@@ -19,7 +19,6 @@ class BaseConfigurationTest extends UnitTestCase
             'delete' => 'deleted',
             'tstamp' => 'tstamp',
             'crdate' => 'crdate',
-            'cruser_id' => 'cruser_id',
             'origUid' => 'origUid',
             'title' => 'Test table',
             'label' => 'uid',

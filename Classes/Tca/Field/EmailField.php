@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Typo3Api\Tca\Field;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Typo3Api\Builder\Context\TcaBuilderContext;
 
 class EmailField extends InputField
 {
@@ -21,7 +22,15 @@ class EmailField extends InputField
     protected function getEvals(): array
     {
         $evals = parent::getEvals();
-        $evals[] = 'email';
+
         return $evals;
+    }
+
+    public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder): array
+    {
+        $config = parent::getFieldTcaConfig($tcaBuilder);
+        $config['type'] = 'email';
+
+        return $config;
     }
 }

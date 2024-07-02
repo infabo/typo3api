@@ -25,7 +25,6 @@ class Double2Field extends AbstractField
             },
             'default' => fn(Options $options) => // try to get default as close to 0 as possible
 max($options['min'], min($options['max'], 0.0)),
-            'required' => false, // TODO required is kind of useless on an int
 
             'dbType' => function (Options $options) {
                 $decimals = 2; // hardcoded because typo3 only offers double2 validation
@@ -33,7 +32,7 @@ max($options['min'], min($options['max'], 0.0)),
                 /**
                  * @phpstan-ignore-next-line
                  */
-                $digits = max(strlen(abs((int)$options['min'])), strlen(abs((int)$options['max']))) + $decimals;
+                $digits = max(strlen((string)abs((int)$options['min'])), strlen((string)abs((int)$options['max']))) + $decimals;
 
                 if ($options['min'] < 0.0) {
                     return "NUMERIC($digits, $decimals) DEFAULT '$default' NOT NULL";
@@ -49,20 +48,19 @@ max($options['min'], min($options['max'], 0.0)),
         $resolver->setAllowedTypes('max', ['int', 'double']);
         $resolver->setAllowedTypes('size', 'int');
         $resolver->setAllowedTypes('default', ['int', 'double']);
-        $resolver->setAllowedTypes('required', 'bool');
     }
 
     public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder): array
     {
         return [
-            'type' => 'input',
+            'type' => 'number',
+            'format' => 'decimal',
             'size' => (int)($this->getOption('size') / 2), // adjust the size to fit the character count better
             'default' => $this->getOption('default'),
             'range' => [
                 'lower' => $this->getOption('min'),
                 'upper' => $this->getOption('max')
             ],
-            'eval' => 'trim,double2' . ($this->getOption('required') ? ',required' : '')
         ];
     }
 }

@@ -24,7 +24,6 @@ class InputField extends AbstractField
             'size' => fn(Options $options) => $options['max'],
             'default' => '',
             'placeholder' => null,
-            'required' => false,
             'trim' => true,
             'charset' => null,
             'is_in' => null,
@@ -57,7 +56,6 @@ class InputField extends AbstractField
         $resolver->setAllowedTypes('size', 'int');
         $resolver->setAllowedTypes('default', 'string');
         $resolver->setAllowedTypes('placeholder', ['null', 'string']);
-        $resolver->setAllowedTypes('required', 'bool');
         $resolver->setAllowedTypes('trim', 'bool');
         $resolver->setAllowedValues('charset', [null, 'alpha', 'alphanum', 'alphanum_x']);
         $resolver->setAllowedTypes('is_in', ['null', 'string']);
@@ -106,10 +104,6 @@ class InputField extends AbstractField
 
         if ($this->getOption('trim')) {
             $evals[] = 'trim';
-        }
-
-        if ($this->getOption('required')) {
-            $evals[] = 'required';
         }
 
         if ($this->getOption('charset')) {

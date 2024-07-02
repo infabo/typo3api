@@ -22,8 +22,9 @@ class LinkField extends InputField
     public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder): array
     {
         $config = parent::getFieldTcaConfig($tcaBuilder);
-        $config['renderType'] = 'inputLink';
+        $config['type'] = 'link';
         $config['softref'] = 'typolink';
+
         return $config;
     }
 }

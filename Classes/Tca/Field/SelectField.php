@@ -31,11 +31,14 @@ class SelectField extends AbstractField
             }, $options['values']),
             'itemsProcFunc' => null,
 
-            'required' => true, // TODO i somehow want this to be false now since having an empty option is nice
-
             'dbType' => function (Options $options) {
                 $possibleValues = self::getValuesFromItems($options['items']);
-                $defaultValue = addslashes((string) reset($possibleValues));
+
+                if ($options['default'] && !in_array($options['default'], $possibleValues, true)) {
+                    throw new InvalidOptionsException("The default value must be one of the possible values.");
+                }
+
+                $defaultValue = addslashes((string) ($options['default'] ?? reset($possibleValues)));
 
                 $minimumChars = $options['itemsProcFunc'] ? 30 : 1;
                 $maxChars = max($minimumChars, ...array_map('mb_strlen', $possibleValues));
@@ -68,17 +71,34 @@ class SelectField extends AbstractField
 
         $resolver->setNormalizer('items', function (Options $options, $items) {
             // ensure at least one value, or an empty value if not required
-            if (empty($items) || ($options['required'] === false && $items[0][1] !== '')) {
+            if (empty($items) || ($options['required'] === false && ($items[0][1] ?? null !== '' || $items[0]['value'] ?? null !== ''))) {
                 array_unshift($items, ['', '']);
             }
 
             foreach ($items as $value) {
+                $dbValue = $value[1] ?? $value['value'];
                 // the documentation says these chars are invalid
                 // https://docs.typo3.org/typo3cms/TCAReference/ColumnsConfig/Type/Select.html#items
-                if (preg_match('/[|,;]/', (string) $value[1])) {
+                if (preg_match('/[|,;]/', (string) $dbValue)) {
                     throw new InvalidOptionsException("The value in an select must not contain the chars '|,;'.");
                 }
             }
+
+            // Migrate from ['<label>', '<value>'] syntax to new ['label' => <label>, 'value' => <value>]
+            $items = array_map(function ($item) {
+                if (isset($item['label']) && isset($item['value'])) {
+                    return $item;
+                }
+
+                $label = $item[0];
+                $value = $item[1];
+
+                return [
+                    'label' => $label,
+                    'value' => $value,
+                ];
+            }, $items);
+
 
             return $items;
         });
@@ -89,15 +109,11 @@ class SelectField extends AbstractField
         $values = [];
 
         foreach ($items as $item) {
-            if (!isset($item[1])) {
+            if (!isset($item['value'])) {
                 continue;
             }
 
-            if ($item[1] === '--div--') {
-                continue;
-            }
-
-            $values[] = $item[1];
+            $values[] = $item['value'];
         }
 
         if (empty($values)) {
