@@ -84,6 +84,7 @@ class InputField extends AbstractField
             'max' => $this->getOption('max'),
             'eval' => implode(',', $this->getEvals()),
             'default' => $this->getOption('default'),
+            'required' => $this->getOption('required'),
         ];
 
         if ($this->getOption('placeholder') !== null) {
@@ -106,10 +107,6 @@ class InputField extends AbstractField
 
         if ($this->getOption('trim')) {
             $evals[] = 'trim';
-        }
-
-        if ($this->getOption('required')) {
-            $evals[] = 'required';
         }
 
         if ($this->getOption('charset')) {

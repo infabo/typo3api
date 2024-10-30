@@ -86,9 +86,9 @@ class TextareaField extends AbstractField
             'rows' => $this->getOption('rows'),
             'eval' => implode(',', array_filter([
                 $this->getOption('trim') ? 'trim' : null,
-                $this->getOption('required') ? 'required' : null,
                 // i'd love to define null here, but this will render a checkbox which i don't want
             ])),
+            'required' => $this->getOption('required'),
         ];
 
         if ($this->getOption('placeholder') !== null) {

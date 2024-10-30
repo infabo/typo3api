@@ -62,7 +62,8 @@ max($options['min'], min($options['max'], 0.0)),
                 'lower' => $this->getOption('min'),
                 'upper' => $this->getOption('max')
             ],
-            'eval' => 'trim,double2' . ($this->getOption('required') ? ',required' : '')
+            'eval' => 'trim,double2',
+            'required' => $this->getOption('required'),
         ];
     }
 }
