@@ -70,24 +70,22 @@ $options['minitems'] === 0,
 
     public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder): array
     {
-        return ExtensionManagementUtility::getFileFieldTCAConfig(
-            $this->getOption('name'),
-            [
-                'minitems' => $this->getOption('minitems'),
-                'maxitems' => $this->getOption('maxitems'),
-                'appearance' => [
-                    'collapseAll' => $this->getOption('collapseAll'),
-                    'showPossibleLocalizationRecords' => $this->getOption('localize'),
-                    'showAllLocalizationLink' => $this->getOption('localize'),
-                    'showSynchronizationLink' => $this->getOption('localize'),
-                    'enabledControls' => [
-                        'hide' => $this->getOption('allowHide'),
-                        'localize' => $this->getOption('localize'),
-                    ]
+        return [
+            'type' => 'file',
+            'minitems' => $this->getOption('minitems'),
+            'maxitems' => $this->getOption('maxitems'),
+            'allowed' => $this->getOption('allowedFileExtensions'),
+            'disallowed' => $this->getOption('disallowedFileExtensions'),
+            'appearance' => [
+                'collapseAll' => $this->getOption('collapseAll'),
+                'showPossibleLocalizationRecords' => $this->getOption('localize'),
+                'showAllLocalizationLink' => $this->getOption('localize'),
+                'showSynchronizationLink' => $this->getOption('localize'),
+                'enabledControls' => [
+                    'hide' => $this->getOption('allowHide'),
+                    'localize' => $this->getOption('localize'),
                 ]
-            ],
-            $this->getOption('allowedFileExtensions'),
-            $this->getOption('disallowedFileExtensions')
-        );
+            ]
+        ];
     }
 }
