@@ -14,7 +14,7 @@ class IntlItemsProcFunc
         $countryNames = Countries::getNames();
         asort($countryNames);
         foreach ($countryNames as $countryCode => $countryName) {
-            $params['items'][] = [$countryName, $countryCode];
+            $params['items'][] = ['label' => $countryName, 'value' => $countryCode];
         }
     }
 
@@ -23,7 +23,7 @@ class IntlItemsProcFunc
         $languageNames = Languages::getNames();
         asort($languageNames);
         foreach ($languageNames as $locale => $languageName) {
-            $params['items'][] = [$languageName, $locale];
+            $params['items'][] = ['label' => $languageName, 'value' => $locale];
         }
     }
 }

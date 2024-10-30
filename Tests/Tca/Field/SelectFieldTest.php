@@ -28,7 +28,7 @@ class SelectFieldTest extends AbstractFieldTest
                     'type' => 'select',
                     'renderType' => 'selectSingle',
                     'items' => [
-                        ['', '']
+                        ['label' => '', 'value' => '']
                     ]
                 ],
                 'l10n_mode' => 'exclude',
@@ -42,9 +42,9 @@ class SelectFieldTest extends AbstractFieldTest
         $stubTable = new TableBuilderContext('stub_table', '1');
 
         $items = [
-            ['label', 'value'],
-            ['divider', '--div--'],
-            ['label2', 'value2'],
+            ['label' => 'label', 'value' => 'value'],
+            ['label' => 'divider', 'value' => '--div--'],
+            ['label' => 'label2', 'value' => 'value2'],
         ];
         $field = $this->createFieldInstance('some_field', [
             'items' => $items
@@ -97,7 +97,7 @@ class SelectFieldTest extends AbstractFieldTest
         $this->assertEquals(
             [
                 'itemsProcFunc' => 'some-func',
-                'items' => [['', '']],
+                'items' => [['label' => '', 'value' => '']],
                 'type' => 'select',
                 'renderType' => 'selectSingle'
             ],

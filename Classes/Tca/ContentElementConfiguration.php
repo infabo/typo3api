@@ -128,7 +128,7 @@ class ContentElementConfiguration implements TcaConfigurationInterface
         // TODO allow to define a position in dropdown
         if (!isset($GLOBALS['TCA']['tt_content']['columns']['CType']['extended'])) {
             $GLOBALS['TCA']['tt_content']['columns']['CType']['extended'] = true;
-            $GLOBALS['TCA']['tt_content']['columns']['CType']['config']['items'][] = ['Extended', '--div--'];
+            $GLOBALS['TCA']['tt_content']['columns']['CType']['config']['items'][] = ['label' => 'Extended', 'value' => '--div--'];
         }
         $newSelectItem = [$options['name'], $options['typeName'], $options['icon']];
         $GLOBALS['TCA']['tt_content']['columns']['CType']['config']['items'][] = $newSelectItem;

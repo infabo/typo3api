@@ -27,7 +27,7 @@ class SelectField extends AbstractField
             'items' => fn(Options $options) => array_map(static function ($value) {
                 $label = preg_replace(['/([A-Z])/', '/[_\s]+/'], ['_$1', ' '], $value);
                 $label = ucfirst(strtolower(trim($label)));
-                return [$label, $value];
+                return ['label' => $label, 'value' => $value];
             }, $options['values']),
             'itemsProcFunc' => null,
 
@@ -69,7 +69,7 @@ class SelectField extends AbstractField
         $resolver->setNormalizer('items', function (Options $options, $items) {
             // ensure at least one value, or an empty value if not required
             if (empty($items) || ($options['required'] === false && $items[0][1] !== '')) {
-                array_unshift($items, ['', '']);
+                array_unshift($items, ['label' => '', 'value' => '']);
             }
 
             foreach ($items as $value) {
@@ -89,15 +89,15 @@ class SelectField extends AbstractField
         $values = [];
 
         foreach ($items as $item) {
-            if (!isset($item[1])) {
+            if (!isset($item['value'])) {
                 continue;
             }
 
-            if ($item[1] === '--div--') {
+            if ($item['value'] === '--div--') {
                 continue;
             }
 
-            $values[] = $item[1];
+            $values[] = $item['value'];
         }
 
         if (empty($values)) {

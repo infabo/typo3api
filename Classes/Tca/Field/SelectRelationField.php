@@ -47,11 +47,11 @@ class SelectRelationField extends AbstractField
         $resolver->setNormalizer('items', function (Options $options, array $items) {
             // ensure at least one value, or an empty value if not required
             if ($options['required'] === false) {
-                array_unshift($items, ['', '0']);
+                array_unshift($items, ['label' => '', 'value' => '0']);
             }
 
             foreach ($items as $item) {
-                $value = $item[1];
+                $value = $item['value'];
                 if (!preg_match('/^\d+$/', $value)) {
                     $msg = "SelectRelationField options may only be numeric, got '$value'.";
                     throw new InvalidOptionsException($msg);

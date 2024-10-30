@@ -29,7 +29,7 @@ class SelectRelationFieldTest extends AbstractFieldTest
                     'foreign_table' => 'tx_typo3api_foreign_table',
                     'foreign_table_where' => '',
                     'items' => [
-                        ['', '0'],
+                        ['label' => '', 'value' => '0'],
                     ],
                 ],
             ],
