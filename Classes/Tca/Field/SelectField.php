@@ -72,10 +72,16 @@ class SelectField extends AbstractField
                 array_unshift($items, ['label' => '', 'value' => '']);
             }
 
-            foreach ($items as $value) {
+            foreach ($items as &$item) {
+                foreach (['label', 'value', 'icon', 'group', 'description'] as $index => $key) {
+                    if (isset($item[$index]) && !isset($item[$key])) {
+                        $item[$key] = $item[$index];
+                        unset($item[$index]);
+                    }
+                }
                 // the documentation says these chars are invalid
                 // https://docs.typo3.org/typo3cms/TCAReference/ColumnsConfig/Type/Select.html#items
-                if (preg_match('/[|,;]/', $value[1] ?? $value['value'])) {
+                if (preg_match('/[|,;]/', $item[1] ?? $item['value'])) {
                     throw new InvalidOptionsException("The value in an select must not contain the chars '|,;'.");
                 }
             }
