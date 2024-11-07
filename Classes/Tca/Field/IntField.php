@@ -42,14 +42,13 @@ max($options['min'], min($options['max'], 0)),
     public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder): array
     {
         return [
-            'type' => 'input',
+            'type' => 'number',
             'size' => (int)($this->getOption('size') / 2), // adjust the size to fit the character count better
             'default' => $this->getOption('default'),
             'range' => [
                 'lower' => $this->getOption('min'),
                 'upper' => $this->getOption('max')
             ],
-            'eval' => 'trim,int',
             'required' => $this->getOption('required'),
         ];
     }

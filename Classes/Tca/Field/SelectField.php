@@ -75,7 +75,7 @@ class SelectField extends AbstractField
             foreach ($items as $value) {
                 // the documentation says these chars are invalid
                 // https://docs.typo3.org/typo3cms/TCAReference/ColumnsConfig/Type/Select.html#items
-                if (preg_match('/[|,;]/', $value[1])) {
+                if (preg_match('/[|,;]/', $value[1] ?? $value['value'])) {
                     throw new InvalidOptionsException("The value in an select must not contain the chars '|,;'.");
                 }
             }

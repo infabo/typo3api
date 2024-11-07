@@ -130,7 +130,7 @@ class ContentElementConfiguration implements TcaConfigurationInterface
             $GLOBALS['TCA']['tt_content']['columns']['CType']['extended'] = true;
             $GLOBALS['TCA']['tt_content']['columns']['CType']['config']['items'][] = ['label' => 'Extended', 'value' => '--div--'];
         }
-        $newSelectItem = [$options['name'], $options['typeName'], $options['icon']];
+        $newSelectItem = ['label' => $options['name'], 'value' => $options['typeName'], 'icon' => $options['icon']];
         $GLOBALS['TCA']['tt_content']['columns']['CType']['config']['items'][] = $newSelectItem;
     }
 
