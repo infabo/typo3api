@@ -31,17 +31,17 @@
 		}
 	},
 	"require": {
-		"php": "^8.1",
-		"symfony/intl": "^5 || ^6",
-		"symfony/options-resolver": "^5 || ^6",
-		"symfony/polyfill-mbstring": "^1",
-		"symfony/polyfill-php80": "^1.23.0",
-		"typo3/cms-backend": "^12.4",
-		"typo3/cms-core": "^12.4",
-		"typo3/cms-extbase": "^12.4",
-		"typo3/cms-frontend": "^12.4",
-		"typo3/cms-install": "^12.4",
-		"typo3/cms-lang": "^12.4"
+		"php": "^8.3",
+		"symfony/intl": "^6 || ^7",
+		"symfony/options-resolver": "^6 || ^7",
+		"symfony/polyfill-mbstring": "^v1.33.0",
+		"symfony/polyfill-php80": "^v1.33.0",
+		"typo3/cms-backend": "^13.4 || ^14.3",
+		"typo3/cms-core": "^13.4 || ^14.3",
+		"typo3/cms-extbase": "^13.4 || ^14.3",
+		"typo3/cms-frontend": "^13.4 || ^14.3",
+		"typo3/cms-install": "^13.4 || ^14.3",
+		"typo3/cms-lang": "^13.4 || ^14.3"
 	},
 	"autoload": {
 		"psr-4": {
@@ -49,10 +49,9 @@
 		}
 	},
 	"require-dev": {
-		"friendsoftypo3/phpstan-typo3": "^0.9.0",
-		"ssch/typo3-rector": "^1.1",
-		"symplify/easy-coding-standard": "^11",
-		"typo3/testing-framework": "^6.16.6"
+		"ssch/typo3-rector": "^v3.13.0",
+		"symplify/easy-coding-standard": "^13.0.4",
+		"typo3/testing-framework": "^9.4.0"
 	},
 	"autoload-dev": {
 		"psr-4": {
