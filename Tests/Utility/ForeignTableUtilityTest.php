@@ -6,6 +6,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ForeignTableUtilityTest extends UnitTestCase
 {
+    #[\Override]
     public function tearDown(): void
     {
         unset($GLOBALS['TCA']);

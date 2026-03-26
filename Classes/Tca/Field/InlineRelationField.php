@@ -14,6 +14,7 @@ use Typo3Api\Utility\DbFieldDefinition;
 
 class InlineRelationField extends AbstractField
 {
+    #[\Override]
     protected function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
@@ -48,7 +49,7 @@ class InlineRelationField extends AbstractField
 
         $resolver->setNormalizer('minitems', function (Options $options, $minItems) {
             if ($minItems < 0) {
-                throw new InvalidOptionsException("Minitems can't be smaller than 0, got $minItems.");
+                throw new InvalidOptionsException("Minitems can't be smaller than 0, got $minItems.", 2782555332);
             }
 
             if (
@@ -59,14 +60,15 @@ class InlineRelationField extends AbstractField
                 $msg = "minitems can't be used if the foreign_table has enablecolumns. This is to prevent unexpected behavior.";
                 $msg .= " Someone could create a relation and disable the related record (eg. by setting endtime).";
                 $msg .= " Typo3 can't catch that so it is better to just not use minitems in combination with enablecolumns.";
-                throw new InvalidOptionsException($msg);
+                throw new InvalidOptionsException($msg, 9032127182);
             }
 
             return $minItems;
         });
     }
 
-    public function modifyCtrl(array &$ctrl, TcaBuilderContext $tcaBuilder)
+    #[\Override]
+    public function modifyCtrl(array &$ctrl, TcaBuilderContext $tcaBuilder): void
     {
         parent::modifyCtrl($ctrl, $tcaBuilder);
 
@@ -75,7 +77,7 @@ class InlineRelationField extends AbstractField
             $msg = "Configure $foreignTable before adding it in the irre configuraiton of $tcaBuilder.";
             $msg .= "\nThis can also be a loading order issue of tca files. You can try to put the inline relation into TCA/Overrides.";
             $msg .= "\nIf you just need the foreign table in this relation, you might also consider configuring it inline here.";
-            throw new \RuntimeException($msg);
+            throw new \RuntimeException($msg, 7893598378);
         }
 
         $foreignTableDefinition = $GLOBALS['TCA'][$foreignTable];
@@ -102,7 +104,7 @@ class InlineRelationField extends AbstractField
     {
         $foreignTable = $this->getOption('foreign_table');
         if (!isset($GLOBALS['TCA'][$foreignTable])) {
-            throw new \RuntimeException("Configure $foreignTable before adding it in the irre configuraiton of $tcaBuilder");
+            throw new \RuntimeException("Configure $foreignTable before adding it in the irre configuraiton of $tcaBuilder", 7348095712);
         }
 
         $foreignTableDefinition = $GLOBALS['TCA'][$foreignTable];
@@ -140,6 +142,7 @@ class InlineRelationField extends AbstractField
         ];
     }
 
+    #[\Override]
     public function getColumns(TcaBuilderContext $tcaBuilder): array
     {
         $columns = parent::getColumns($tcaBuilder);
@@ -153,13 +156,14 @@ class InlineRelationField extends AbstractField
         return $columns;
     }
 
+    #[\Override]
     public function getDbTableDefinitions(TableBuilderContext $tableBuilder): array
     {
         $tableDefinitions = parent::getDbTableDefinitions($tableBuilder);
 
         // define the field on the other side
         // TODO somewhere it should be checked if this field is already defined
-        $foreignField = addslashes($this->getOption('foreign_field'));
+        $foreignField = addslashes((string) $this->getOption('foreign_field'));
         $foreignTable = $this->getOption('foreign_table');
 
         // for self referencing relations the foreign table key might already exist, otherwise create it

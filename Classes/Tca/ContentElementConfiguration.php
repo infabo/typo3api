@@ -58,9 +58,9 @@ class ContentElementConfiguration implements TcaConfigurationInterface
     /**
      * @var OptionsResolver
      */
-    private OptionsResolver $optionsResolver;
+    private readonly OptionsResolver $optionsResolver;
 
-    public function __construct(private array $options = [])
+    public function __construct(private readonly array $options = [])
     {
         $this->optionsResolver = new OptionsResolver();
         $this->optionsResolver->setDefaults([
@@ -97,17 +97,17 @@ class ContentElementConfiguration implements TcaConfigurationInterface
     {
         if (!$context instanceof TableBuilderContext) {
             $type = get_debug_type($context);
-            throw new \RuntimeException("Expected " . TableBuilderContext::class . ", got $type");
+            throw new \RuntimeException("Expected " . TableBuilderContext::class . ", got $type", 3082615033);
         }
 
         if ($context->getTableName() !== 'tt_content') {
-            throw new \RuntimeException("Content elements can only be configured for the tt_content table.");
+            throw new \RuntimeException("Content elements can only be configured for the tt_content table.", 2006945285);
         }
 
         return $context;
     }
 
-    public function modifyCtrl(array &$ctrl, TcaBuilderContext $tcaBuilder)
+    public function modifyCtrl(array &$ctrl, TcaBuilderContext $tcaBuilder): void
     {
         $tcaBuilder = $this->testContext($tcaBuilder);
 

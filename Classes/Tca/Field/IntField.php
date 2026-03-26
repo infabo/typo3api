@@ -11,6 +11,7 @@ use Typo3Api\Utility\DbFieldDefinition;
 
 class IntField extends AbstractField
 {
+    #[\Override]
     protected function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);

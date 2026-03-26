@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EmailField extends InputField
 {
+    #[\Override]
     protected function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
@@ -18,6 +19,7 @@ class EmailField extends InputField
         ]);
     }
 
+    #[\Override]
     protected function getEvals(): array
     {
         $evals = parent::getEvals();

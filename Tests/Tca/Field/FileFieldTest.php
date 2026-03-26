@@ -3,16 +3,17 @@
 namespace Typo3Api\Tca\Field;
 
 
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use Typo3Api\Builder\Context\TableBuilderContext;
 
 class FileFieldTest extends AbstractFieldTest
 {
+    #[\Override]
     protected function createFieldInstance(string $name, array $options = []): AbstractField
     {
         return new FileField($name, $options);
     }
 
+    #[\Override]
     protected function assertBasicColumns(AbstractField $field)
     {
         $stubTable = new TableBuilderContext('stub_table', '1');
@@ -20,7 +21,10 @@ class FileFieldTest extends AbstractFieldTest
         $this->assertEquals([
             $field->getName() => [
                 'label' => $field->getOption('label'),
-                'config' => ExtensionManagementUtility::getFileFieldTCAConfig($field->getName(), [
+                'config' => [
+                    // TODO: Important! Verify that the fieldname value in foreign table either matches the column name
+                    // or is set properly in the following TCA, see https://docs.typo3.org/permalink/t3tca:confval-inline-foreign-match-fields
+                    'type' => 'file',
                     'minitems' => 0,
                     'maxitems' => 100,
                     'appearance' => [
@@ -32,7 +36,7 @@ class FileFieldTest extends AbstractFieldTest
                             'localize' => true,
                         ],
                     ],
-                ]),
+                ],
             ],
         ], $field->getColumns($stubTable));
     }
@@ -40,6 +44,7 @@ class FileFieldTest extends AbstractFieldTest
     /**
      * @param AbstractField $field
      */
+    #[\Override]
     protected function assertBasicDatabase(AbstractField $field)
     {
         $stubTable = new TableBuilderContext('stub_table', '1');
@@ -56,7 +61,8 @@ class FileFieldTest extends AbstractFieldTest
      *
      * @param string $fieldName
      */
-    public function testIndex(string $fieldName)
+    #[\Override]
+    public function testIndex(string $fieldName): void
     {
         $stubTable = new TableBuilderContext('stub_table', '1');
         $field = $this->createFieldInstance($fieldName, ['index' => true]);

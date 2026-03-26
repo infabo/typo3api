@@ -53,6 +53,6 @@ class DbFieldDefinition
 
         // i leave bigint away because it'll cause all sorts of trouble with 32 vs 64 bit php and other quirks.
 
-        throw new \LogicException("Can't find a fitting db type for range '$low' to '$high'.");
+        throw new \LogicException("Can't find a fitting db type for range '$low' to '$high'.", 1704202641);
     }
 }

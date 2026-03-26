@@ -23,7 +23,7 @@ class CompoundTcaConfigurationTest extends UnitTestCase
         return new CompoundTcaConfiguration($instances);
     }
 
-    public function testAddingTwoFields()
+    public function testAddingTwoFields(): void
     {
         $testTable = new TableBuilderContext('test_table', '1');
         $field1 = new InputField('field_1');
@@ -48,7 +48,7 @@ class CompoundTcaConfigurationTest extends UnitTestCase
         ]);
     }
 
-    public function testMergeTwoFields()
+    public function testMergeTwoFields(): void
     {
         $testTable = new TableBuilderContext('test_table', '1');
         $field1 = new InputField('field_1');

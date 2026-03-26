@@ -17,11 +17,13 @@ class InlineRelationFieldTest extends AbstractFieldTest
         ];
     }
 
+    #[\Override]
     protected function createFieldInstance(string $name, array $options = []): AbstractField
     {
         return new InlineRelationField($name, $options + ['foreign_table' => 'tx_typo3api_foreign_table']);
     }
 
+    #[\Override]
     protected function assertBasicCtrlChange(AbstractField $field)
     {
         $GLOBALS['TCA']['tx_typo3api_foreign_table']['ctrl'] = [];
@@ -38,6 +40,7 @@ class InlineRelationFieldTest extends AbstractFieldTest
         );
     }
 
+    #[\Override]
     protected function assertBasicDatabase(AbstractField $field)
     {
         $testTable = new TableBuilderContext('stub_table', '1');
@@ -54,6 +57,7 @@ class InlineRelationFieldTest extends AbstractFieldTest
         );
     }
 
+    #[\Override]
     protected function assertBasicColumns(AbstractField $field)
     {
         $testTable = new TableBuilderContext('stub_table', '1');
@@ -96,7 +100,8 @@ class InlineRelationFieldTest extends AbstractFieldTest
      * @dataProvider validNameProvider
      * @param string $fieldName
      */
-    public function testIndex(string $fieldName)
+    #[\Override]
+    public function testIndex(string $fieldName): void
     {
         $testTable = new TableBuilderContext('stub_table', '1');
         $field = $this->createFieldInstance($fieldName, ['index' => true]);
@@ -124,7 +129,8 @@ class InlineRelationFieldTest extends AbstractFieldTest
      * @dataProvider validNameProvider
      * @param string $fieldName
      */
-    public function testLocalize(string $fieldName)
+    #[\Override]
+    public function testLocalize(string $fieldName): void
     {
         $stubTable = new TableBuilderContext('stub_table', '1');
 

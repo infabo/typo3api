@@ -14,6 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class PhoneField extends InputField
 {
+    #[\Override]
     protected function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);

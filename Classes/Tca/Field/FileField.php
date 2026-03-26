@@ -7,13 +7,13 @@ namespace Typo3Api\Tca\Field;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use Typo3Api\Builder\Context\TcaBuilderContext;
 use Typo3Api\Utility\DbFieldDefinition;
 
 class FileField extends AbstractField
 {
+    #[\Override]
     protected function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
@@ -45,7 +45,7 @@ $options['minitems'] === 0,
             /**
              * @phpstan-ignore-next-line
              */
-            return implode(',', array_filter($fileExtensions, 'strlen'));
+            return implode(',', array_filter($fileExtensions, strlen(...)));
         };
         $resolver->setNormalizer('allowedFileExtensions', $normalizeFileExtensions);
         $resolver->setNormalizer('disallowedFileExtensions', $normalizeFileExtensions);
@@ -53,7 +53,7 @@ $options['minitems'] === 0,
         /** @noinspection PhpUnusedParameterInspection */
         $resolver->setNormalizer('minitems', function (Options $options, $minitems) {
             if ($minitems < 0) {
-                throw new InvalidOptionsException("minitems must not be smaller than 0");
+                throw new InvalidOptionsException("minitems must not be smaller than 0", 9787001403);
             }
 
             return $minitems;
@@ -61,7 +61,7 @@ $options['minitems'] === 0,
 
         $resolver->setNormalizer('maxitems', function (Options $options, $maxitems) {
             if ($maxitems < $options['minitems']) {
-                throw new InvalidOptionsException("maxitems must not be smaller than minitems");
+                throw new InvalidOptionsException("maxitems must not be smaller than minitems", 8815226231);
             }
 
             return $maxitems;

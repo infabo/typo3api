@@ -9,6 +9,7 @@ class AbstractFieldTest extends UnitTestCase
 {
     const STUB_DB_TYPE = "VARCHAR(32) DEFAULT '' NOT NULL";
 
+    #[\Override]
     protected function setUp(): void
     {
         if (isset($GLOBALS['TCA'])) {
@@ -16,6 +17,7 @@ class AbstractFieldTest extends UnitTestCase
         }
     }
 
+    #[\Override]
     protected function tearDown(): void
     {
         if (isset($GLOBALS['TCA'])) {
@@ -165,7 +167,7 @@ class AbstractFieldTest extends UnitTestCase
      * @dataProvider validNameProvider
      * @param string $fieldName
      */
-    public function testIndex(string $fieldName)
+    public function testIndex(string $fieldName): void
     {
         $testTable = new TableBuilderContext('stub_table', '1');
         $field = $this->createFieldInstance($fieldName, ['index' => true]);
@@ -212,7 +214,7 @@ class AbstractFieldTest extends UnitTestCase
      * @dataProvider validNameProvider
      * @param string $fieldName
      */
-    public function testLocalize(string $fieldName)
+    public function testLocalize(string $fieldName): void
     {
         $stubTable = new TableBuilderContext('stub_table', '1');
 

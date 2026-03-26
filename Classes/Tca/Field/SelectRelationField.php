@@ -13,6 +13,7 @@ use Typo3Api\Utility\ForeignTableUtility;
 
 class SelectRelationField extends AbstractField
 {
+    #[\Override]
     protected function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
@@ -54,7 +55,7 @@ class SelectRelationField extends AbstractField
                 $value = $item['value'];
                 if (!preg_match('/^\d+$/', $value)) {
                     $msg = "SelectRelationField options may only be numeric, got '$value'.";
-                    throw new InvalidOptionsException($msg);
+                    throw new InvalidOptionsException($msg, 1628654973);
                 }
             }
 

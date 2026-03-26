@@ -9,11 +9,13 @@ class SelectRelationFieldTest extends AbstractFieldTest
 {
     const STUB_DB_TYPE = "INT(11) DEFAULT '0' NOT NULL";
 
+    #[\Override]
     protected function createFieldInstance(string $name, array $options = []): AbstractField
     {
         return new SelectRelationField($name, $options + ['foreign_table' => 'tx_typo3api_foreign_table']);
     }
 
+    #[\Override]
     protected function assertBasicColumns(AbstractField $field)
     {
         $testTable = new TableBuilderContext('stub_table', '1');

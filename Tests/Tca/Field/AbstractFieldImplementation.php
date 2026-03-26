@@ -13,6 +13,7 @@ class AbstractFieldImplementation extends AbstractField
         return [];
     }
 
+    #[\Override]
     protected function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);

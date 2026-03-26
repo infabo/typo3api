@@ -9,7 +9,7 @@ use Typo3Api\Tca\TcaConfigurationInterface;
 
 class TcaConfigurationException extends \RuntimeException
 {
-    public function __construct(private TcaConfigurationInterface $configuration, $message = "", $code = 0, Throwable $previous = null)
+    public function __construct(private readonly TcaConfigurationInterface $configuration, $message = "", $code = 0, Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }

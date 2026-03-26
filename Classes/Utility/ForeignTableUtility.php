@@ -32,7 +32,7 @@ class ForeignTableUtility
                 }
 
                 return ' ORDER BY ' . $sortByField;
-            }, $where, 1);
+            }, (string) $where, 1);
         } elseif (isset($foreignTable['ctrl']['default_sortby'])) {
             $sortByDefinitions = GeneralUtility::trimExplode(',', $foreignTable['ctrl']['default_sortby']);
             foreach ($sortByDefinitions as &$sortByDefinition) {
@@ -46,9 +46,9 @@ class ForeignTableUtility
                 }
 
                 return ' ORDER BY ' . $sortByStr;
-            }, $where, 1);
+            }, (string) $where, 1);
         }
 
-        return trim($where);
+        return trim((string) $where);
     }
 }

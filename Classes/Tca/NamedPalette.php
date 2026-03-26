@@ -11,12 +11,12 @@ class NamedPalette extends CompoundTcaConfiguration
     /**
      * @var string
      */
-    private string $name;
+    private readonly string $name;
 
     public function __construct(string $name, array $children = [])
     {
         if (preg_match('/[,;]/', $name)) {
-            throw new \RuntimeException("The name of a palette must not contain comma or semicolon, got $name");
+            throw new \RuntimeException("The name of a palette must not contain comma or semicolon, got $name", 9091741846);
         }
 
         parent::__construct($children);
@@ -28,6 +28,7 @@ class NamedPalette extends CompoundTcaConfiguration
         return preg_replace('/\W+/', '_', parent::getShowItemString($tcaBuilder));
     }
 
+    #[\Override]
     public function getPalettes(TcaBuilderContext $tcaBuilder): array
     {
         $showItems = [];
@@ -51,6 +52,7 @@ class NamedPalette extends CompoundTcaConfiguration
         return $palettes;
     }
 
+    #[\Override]
     public function getShowItemString(TcaBuilderContext $tcaBuilder): string
     {
         return "--palette--; {$this->name}; " . $this->getPaletteName($tcaBuilder);

@@ -19,7 +19,7 @@ class Address extends NamedPalette
 
     public function __construct(string $name = 'Address', protected array $options = [])
     {
-        $this->prefix = $options['prefix'] ?? strtolower(preg_replace('#\W+#', '_', $name));
+        $this->prefix = $options['prefix'] ?? strtolower((string) preg_replace('#\W+#', '_', $name));
         parent::__construct($name, $this->getFields());
     }
 

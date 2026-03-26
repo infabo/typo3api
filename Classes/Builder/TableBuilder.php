@@ -23,7 +23,7 @@ class TableBuilder implements TcaBuilderInterface
     /**
      * @var TableBuilderContext
      */
-    private TableBuilderContext $context;
+    private readonly TableBuilderContext $context;
 
     /**
      * This is a list of default tabs.
@@ -141,7 +141,7 @@ class TableBuilder implements TcaBuilderInterface
         if (!isset($tca['types'][$type])) {
             $msg = "The Type $type isn't defined so it can't be inherited from it.";
             $msg .= " Possible types are: " . implode(', ', array_keys($tca['types']));
-            throw new \RuntimeException($msg);
+            throw new \RuntimeException($msg, 3299109214);
         }
 
         // TODO maybe not overwrite existing configuration?
@@ -161,18 +161,18 @@ class TableBuilder implements TcaBuilderInterface
         $type = &$GLOBALS['TCA'][$this->getTableName()]['types'][$this->getTypeName()];
 
         $search = '/--div--\s*;\s*' . preg_quote($tab, '/') . '.*?(?=,\s?--div--|$)/Us';
-        $match = preg_match($search, $type['showitem'], $results);
+        $match = preg_match($search, (string) $type['showitem'], $results);
         $newTab = $match ? $results[0] : '--div--; ' . $tab;
 
         if ($match) {
-            $type['showitem'] = preg_replace($search, '', $type['showitem'], 1);
+            $type['showitem'] = preg_replace($search, '', (string) $type['showitem'], 1);
         }
 
         // search the other tab and add the new one in front of it
         $search = '/--div--\s*;\s*' . preg_quote($otherTab, '/') . '.*?(?=,\s?--div--|$)/Us';
-        $type['showitem'] = preg_replace($search, $newTab . ', \0', $type['showitem'], 1, $matches);
+        $type['showitem'] = preg_replace($search, $newTab . ', \0', (string) $type['showitem'], 1, $matches);
         if ($matches === 0) {
-            throw new \RuntimeException("The tab '$otherTab' seems to not exist.");
+            throw new \RuntimeException("The tab '$otherTab' seems to not exist.", 2429061976);
         }
 
         return $this;
@@ -243,7 +243,7 @@ class TableBuilder implements TcaBuilderInterface
                 if ($paletteDefinition !== $tca['palettes'][$paletteName]) {
                     $msg = "The palette $paletteName is already defined in {$this->context} but isn't compatible.";
                     $msg .= " If you can rename the palette than that would be an easy fix for the problem.";
-                    throw new \RuntimeException($msg);
+                    throw new \RuntimeException($msg, 4371691708);
                 }
 
                 continue;
@@ -267,50 +267,47 @@ class TableBuilder implements TcaBuilderInterface
             foreach ($columns as $columnName => $columnDefinition) {
                 $tca['columns'][$columnName] = $columnDefinition;
             }
-
             $tca['ctrl']['EXT']['typo3api']['sql'] = array_merge_recursive(
                 $tca['ctrl']['EXT']['typo3api']['sql'] ?? [],
                 $configuration->getDbTableDefinitions($this->context)
             );
+        } elseif (count($missingColumns) > 0) {
+            $confClass = $configuration::class;
+            $definedColumns = implode(', ', array_keys($columns));
+            $alreadyDefinedColumns = implode(', ',
+                array_intersect(array_keys($existingColumns), array_keys($columns)));
+            $notDefinedColumns = implode(', ', $missingColumns);
+            $msg = "The $confClass defined the database columns $definedColumns.\n";
+            $msg .= "However, the columns $alreadyDefinedColumns are already defined.\n";
+            $msg .= "But the columns $notDefinedColumns are not.\n";
+            $msg .= "This means the definitions would need to be merged.\n";
+            $msg .= "This is currently not implemented because of all the special cases like relations that would need to be handled.\n";
+            $msg .= "Therefor partial configuration of a child type is currently not possible.";
+            throw new \RuntimeException($msg, 2200465490);
         } else {
-            if (count($missingColumns) > 0) {
-                $confClass = get_class($configuration);
-                $definedColumns = implode(', ', array_keys($columns));
-                $alreadyDefinedColumns = implode(', ',
-                    array_intersect(array_keys($existingColumns), array_keys($columns)));
-                $notDefinedColumns = implode(', ', $missingColumns);
-                $msg = "The $confClass defined the database columns $definedColumns.\n";
-                $msg .= "However, the columns $alreadyDefinedColumns are already defined.\n";
-                $msg .= "But the columns $notDefinedColumns are not.\n";
-                $msg .= "This means the definitions would need to be merged.\n";
-                $msg .= "This is currently not implemented because of all the special cases like relations that would need to be handled.\n";
-                $msg .= "Therefor partial configuration of a child type is currently not possible.";
-                throw new \RuntimeException($msg);
-            } else {
-                // all columns are already defined so define overrides, just in case something changed.
-                foreach ($columns as $columnName => $columnDefinition) {
+            // all columns are already defined so define overrides, just in case something changed.
+            foreach ($columns as $columnName => $columnDefinition) {
 
-                    // don't overwrite if both arrays are identical
-                    $existingColumnDefinition = $tca['columns'][$columnName];
-                    if ($existingColumnDefinition === $columnDefinition) {
-                        continue;
-                    }
-
-                    // prevent accidental type changes
-                    $existingColumnType = $existingColumnDefinition['config']['type'];
-                    $newColumnType = $columnDefinition['config']['type'];
-                    if ($newColumnType !== $existingColumnType) {
-                        $tableName = $this->getTableName();
-                        $typeName = $this->getTypeName();
-                        $msg = "Column $columnName is already defined in table $tableName but as type $existingColumnType.";
-                        $msg .= " Tried to change the type in type $typeName with $newColumnType.";
-                        $msg .= " It is not possible to change the field type in different render types.";
-                        $msg .= " Use another field name or use another table entirely.";
-                        throw new \RuntimeException($msg);
-                    }
-
-                    $tca['types'][$this->getTypeName()]['columnsOverrides'][$columnName] = $columnDefinition;
+                // don't overwrite if both arrays are identical
+                $existingColumnDefinition = $tca['columns'][$columnName];
+                if ($existingColumnDefinition === $columnDefinition) {
+                    continue;
                 }
+
+                // prevent accidental type changes
+                $existingColumnType = $existingColumnDefinition['config']['type'];
+                $newColumnType = $columnDefinition['config']['type'];
+                if ($newColumnType !== $existingColumnType) {
+                    $tableName = $this->getTableName();
+                    $typeName = $this->getTypeName();
+                    $msg = "Column $columnName is already defined in table $tableName but as type $existingColumnType.";
+                    $msg .= " Tried to change the type in type $typeName with $newColumnType.";
+                    $msg .= " It is not possible to change the field type in different render types.";
+                    $msg .= " Use another field name or use another table entirely.";
+                    throw new \RuntimeException($msg, 3723273808);
+                }
+
+                $tca['types'][$this->getTypeName()]['columnsOverrides'][$columnName] = $columnDefinition;
             }
         }
     }
@@ -345,7 +342,7 @@ class TableBuilder implements TcaBuilderInterface
 
         // put the new tab right before the first "default tab"
         if (count($this->defaultTabs) > 0 && !in_array($tab, $this->defaultTabs, true)) {
-            $search = '/--div--\s*;\s*' . preg_quote(reset($this->defaultTabs), '/') . '.*(?=,\s*--div--|$)/Us';
+            $search = '/--div--\s*;\s*' . preg_quote((string) reset($this->defaultTabs), '/') . '.*(?=,\s*--div--|$)/Us';
             $type['showitem'] = preg_replace($search, $newTab . ', \0', $type['showitem'], 1, $matches);
             if ($matches > 0) {
                 return;
@@ -353,7 +350,7 @@ class TableBuilder implements TcaBuilderInterface
         }
 
         // just put the new tab at the end
-        if (isset($type['showitem']) && !empty($type['showitem'])) {
+        if (isset($type['showitem']) && (isset($type['showitem']) && !in_array($type['showitem'], ['', '0', []], true))) {
             $type['showitem'] .= ', ' . $newTab;
         } else {
             $type['showitem'] = $newTab;

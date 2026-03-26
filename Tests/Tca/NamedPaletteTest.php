@@ -7,12 +7,14 @@ class NamedPaletteTest extends CompoundTcaConfigurationTest
 {
     const GENERAL = '--div--; LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general, ';
 
+    #[\Override]
     protected function createInstance(TcaConfigurationInterface ...$instances): CompoundTcaConfiguration
     {
         return new NamedPalette('Named palette', $instances);
     }
 
-    public function testAddingTwoFields()
+    #[\Override]
+    public function testAddingTwoFields(): void
     {
         parent::testAddingTwoFields();
         $this->assertEquals(
@@ -25,7 +27,8 @@ class NamedPaletteTest extends CompoundTcaConfigurationTest
         );
     }
 
-    public function testMergeTwoFields()
+    #[\Override]
+    public function testMergeTwoFields(): void
     {
         parent::testMergeTwoFields();
         $this->assertEquals(

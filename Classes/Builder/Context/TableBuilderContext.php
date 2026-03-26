@@ -6,7 +6,7 @@ namespace Typo3Api\Builder\Context;
 
 class TableBuilderContext implements TcaBuilderContext, \Stringable
 {
-    public function __construct(private string $tableName, private string $typeName)
+    public function __construct(private readonly string $tableName, private readonly string $typeName)
     {
     }
     public function getTableName(): string

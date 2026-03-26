@@ -15,11 +15,11 @@ use Typo3Api\Builder\Context\TcaBuilderContext;
  */
 class CacheTagConfiguration implements TcaConfigurationInterface
 {
-    public function __construct(private string $tag, private string $group = 'pages')
+    public function __construct(private readonly string $tag, private readonly string $group = 'pages')
     {
     }
 
-    public function modifyCtrl(array &$ctrl, TcaBuilderContext $tcaBuilder)
+    public function modifyCtrl(array &$ctrl, TcaBuilderContext $tcaBuilder): void
     {
         $ctrl['EXT']['typo3api']['cache_tags'][$this->group][$this->tag] = $this->tag;
     }

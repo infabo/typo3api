@@ -9,6 +9,7 @@ use Typo3Api\Builder\Context\TcaBuilderContext;
 
 class ValueSlider extends IntField
 {
+    #[\Override]
     protected function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
@@ -21,6 +22,7 @@ class ValueSlider extends IntField
         $resolver->setAllowedTypes('width', 'int');
     }
 
+    #[\Override]
     public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder): array
     {
         $config = parent::getFieldTcaConfig($tcaBuilder);

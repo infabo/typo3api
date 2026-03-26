@@ -10,6 +10,7 @@ use Typo3Api\Builder\Context\TcaBuilderContext;
 
 class Double2Field extends AbstractField
 {
+    #[\Override]
     protected function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);

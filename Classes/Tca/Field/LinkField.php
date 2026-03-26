@@ -9,6 +9,7 @@ use Typo3Api\Builder\Context\TcaBuilderContext;
 
 class LinkField extends InputField
 {
+    #[\Override]
     protected function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
@@ -19,6 +20,7 @@ class LinkField extends InputField
         ]);
     }
 
+    #[\Override]
     public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder): array
     {
         $config = parent::getFieldTcaConfig($tcaBuilder);

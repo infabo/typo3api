@@ -7,6 +7,7 @@ use Typo3Api\Builder\Context\TableBuilderContext;
 
 class InputFieldTest extends AbstractFieldTest
 {
+    #[\Override]
     public function createFieldInstance(string $name, array $options = [], $extendDefaults = true): AbstractField
     {
         if ($extendDefaults) {
@@ -16,7 +17,8 @@ class InputFieldTest extends AbstractFieldTest
         return new InputField($name, $options);
     }
 
-    public function assertBasicCtrlChange(AbstractField $field)
+    #[\Override]
+    public function assertBasicCtrlChange(AbstractField $field): void
     {
         $stubTable = new TableBuilderContext('stub_table', '1');
         $ctrl = [];
@@ -27,6 +29,7 @@ class InputFieldTest extends AbstractFieldTest
         ], $ctrl);
     }
 
+    #[\Override]
     protected function assertBasicColumns(AbstractField $field)
     {
         $stubTable = new TableBuilderContext('stub_table', '1');

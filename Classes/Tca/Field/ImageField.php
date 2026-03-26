@@ -28,13 +28,14 @@ class ImageField extends FileField
      */
     public const BLACKLISTED_FORMATS = ['svg', 'ai', 'pcx', 'tga', 'pdf', 'bmp'];
 
+    #[\Override]
     protected function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
         $resolver->setDefaults([
             'useAsThumbnail' => true,
             'allowedFileExtensions' => array_diff(
-                GeneralUtility::trimExplode(',', strtolower($GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'])),
+                GeneralUtility::trimExplode(',', strtolower((string) $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'])),
                 self::BLACKLISTED_FORMATS
             ),
             'cropVariants' => null,
@@ -49,7 +50,7 @@ class ImageField extends FileField
             }
 
             if (!isset($cropVariants['default'])) {
-                throw new \LogicException("You'll want to define a 'default' crop variant or else the editor will break.");
+                throw new \LogicException("You'll want to define a 'default' crop variant or else the editor will break.", 4916725763);
             }
 
             $parsedCropVariants = [];
@@ -71,14 +72,14 @@ class ImageField extends FileField
                     $parts = GeneralUtility::trimExplode(':', $aspectRatio, true);
                     if (count($parts) !== 2) {
                         $msg = "Aspect ratio $aspectRatio could not be parsed. Expected something like 16:9.";
-                        throw new \RuntimeException($msg);
+                        throw new \RuntimeException($msg, 4443160383);
                     }
 
                     $x = (float)$parts[0];
                     $y = (float)$parts[1];
                     if ($x <= 0 || $y <= 0) {
                         $msg = "Aspect ratio $aspectRatio did not return usable sizes, got $x and $y.";
-                        throw new \RuntimeException($msg);
+                        throw new \RuntimeException($msg, 2936777792);
                     }
 
                     $allowedAspectRatios[$aspectRatio] = [
@@ -97,7 +98,8 @@ class ImageField extends FileField
         });
     }
 
-    public function modifyCtrl(array &$ctrl, TcaBuilderContext $tcaBuilder)
+    #[\Override]
+    public function modifyCtrl(array &$ctrl, TcaBuilderContext $tcaBuilder): void
     {
         parent::modifyCtrl($ctrl, $tcaBuilder);
 
@@ -109,6 +111,7 @@ class ImageField extends FileField
         }
     }
 
+    #[\Override]
     public function getFieldTcaConfig(TcaBuilderContext $tcaBuilder): array
     {
         $config = parent::getFieldTcaConfig($tcaBuilder);

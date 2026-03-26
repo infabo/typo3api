@@ -9,7 +9,7 @@ use Typo3Api\Builder\Context\TcaBuilderContext;
 
 class EnableColumnsConfiguration implements TcaConfigurationInterface, DefaultTabInterface
 {
-    public function modifyCtrl(array &$ctrl, TcaBuilderContext $tcaBuilder)
+    public function modifyCtrl(array &$ctrl, TcaBuilderContext $tcaBuilder): void
     {
         if (!isset($ctrl['enablecolumns'])) {
             $ctrl['enablecolumns'] = [];

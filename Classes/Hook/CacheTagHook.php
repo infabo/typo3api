@@ -6,10 +6,12 @@ namespace Typo3Api\Hook;
 
 use TYPO3\CMS\Core\Cache\Exception\NoSuchCacheGroupException;
 use TYPO3\CMS\Core\Cache\CacheManager;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CacheTagHook
 {
+    public function __construct(private readonly \TYPO3\CMS\Core\Cache\CacheManager $cacheManager)
+    {
+    }
     /**
      * @throws NoSuchCacheGroupException
      */
@@ -19,7 +21,7 @@ class CacheTagHook
             return;
         }
 
-        $cacheManager = GeneralUtility::makeInstance(CacheManager::class);
+        $cacheManager = $this->cacheManager;
 
         foreach ($GLOBALS['TCA'][$params['table']]['ctrl']['EXT']['typo3api']['cache_tags'] as $group => $tags) {
             foreach ($tags as &$tag) {

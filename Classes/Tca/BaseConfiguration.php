@@ -15,7 +15,7 @@ use Typo3Api\Builder\Context\TcaBuilderContext;
  */
 class BaseConfiguration implements TcaConfigurationInterface
 {
-    public function modifyCtrl(array &$ctrl, TcaBuilderContext $tcaBuilder)
+    public function modifyCtrl(array &$ctrl, TcaBuilderContext $tcaBuilder): void
     {
         $ctrl['delete'] = 'deleted';
         $ctrl['tstamp'] = 'tstamp';

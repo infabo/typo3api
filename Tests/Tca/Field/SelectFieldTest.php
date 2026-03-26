@@ -9,6 +9,7 @@ class SelectFieldTest extends AbstractFieldTest
 {
     const STUB_DB_TYPE = "VARCHAR(1) DEFAULT '' NOT NULL";
 
+    #[\Override]
     protected function createFieldInstance(string $name, array $options = []): AbstractField
     {
         return new SelectField($name, $options);
@@ -17,6 +18,7 @@ class SelectFieldTest extends AbstractFieldTest
     /**
      * @param AbstractField $field
      */
+    #[\Override]
     protected function assertBasicColumns(AbstractField $field)
     {
         $stubTable = new TableBuilderContext('stub_table', '1');

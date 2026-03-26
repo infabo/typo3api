@@ -11,6 +11,7 @@ use Typo3Api\Builder\Context\TcaBuilderContext;
 
 class InputField extends AbstractField
 {
+    #[\Override]
     protected function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
@@ -39,10 +40,10 @@ class InputField extends AbstractField
                     $msg .= " Use a textarea for saving that many characters.";
                     $msg .= " If you must use an input field for some reason:";
                     $msg .= " define the dbType option with a fitting db type option like TEXT.";
-                    throw new InvalidOptionsException($msg);
+                    throw new InvalidOptionsException($msg, 3918962982);
                 }
 
-                $default = addslashes($options['default']);
+                $default = addslashes((string) $options['default']);
                 return "VARCHAR($maxCharacters) DEFAULT '$default' NOT NULL";
             // using anything but varchar here would make searchFields slow.
                 // I opted to prevent large input fields and by default add everything to searchFields
@@ -69,7 +70,7 @@ class InputField extends AbstractField
         $resolver->setNormalizer('max', function (Options $options, $maxLength) {
             if ($maxLength < 1) {
                 $msg = "Max size of input can't be smaller than 1, got $maxLength";
-                throw new InvalidOptionsException($msg);
+                throw new InvalidOptionsException($msg, 9544367074);
             }
 
             return $maxLength;

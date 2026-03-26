@@ -14,9 +14,7 @@ trait SqlSchemaHookUtil
         $schemaListener->__invoke($event);
         $sql = $event->getSqlData();
 
-        $definitions = array_map(function ($tableName, $fieldDefinitions) {
-            return "CREATE TABLE `$tableName` (\n" . implode(",\n", $fieldDefinitions) . "\n);";
-        }, array_keys($expected), array_values($expected));
+        $definitions = array_map(fn($tableName, $fieldDefinitions) => "CREATE TABLE `$tableName` (\n" . implode(",\n", $fieldDefinitions) . "\n);", array_keys($expected), array_values($expected));
         $this->assertEquals($definitions, $sql, $message);
     }
 }

@@ -9,6 +9,7 @@ use Typo3Api\Utility\IntlItemsProcFunc;
 
 class LanguageField extends SelectField
 {
+    #[\Override]
     protected function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);

@@ -10,6 +10,7 @@ use Typo3Api\Builder\Context\TcaBuilderContext;
 
 class CheckboxField extends AbstractField
 {
+    #[\Override]
     protected function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);

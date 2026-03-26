@@ -63,7 +63,7 @@ abstract class AbstractField implements TcaConfigurationInterface
         ]);
         $resolver->setDefaults([
             'label' => function (Options $options) {
-                $splitName = preg_replace(['/([A-Z])/', '/[_\s]+/'], ['_$1', ' '], $options['name']);
+                $splitName = preg_replace(['/([A-Z])/', '/[_\s]+/'], ['_$1', ' '], (string) $options['name']);
                 return ucfirst(strtolower(trim($splitName)));
             },
             'description' => '',
@@ -92,22 +92,22 @@ abstract class AbstractField implements TcaConfigurationInterface
         $resolver->setNormalizer('name', function (Options $options, $name) {
             if (strlen($name) > 64) {
                 $msg = "The field name should be at most 64 characters long. (and even that... are you insane?)";
-                throw new InvalidOptionsException($msg);
+                throw new InvalidOptionsException($msg, 4321074570);
             }
 
             if (strlen($name) <= 0) {
                 $msg = "The field name must not be empty";
-                throw new InvalidOptionsException($msg);
+                throw new InvalidOptionsException($msg, 2568637884);
             }
 
             if (strtolower($name) !== $name) {
                 $msg = "The field name must be lower case.";
-                throw new InvalidOptionsException($msg);
+                throw new InvalidOptionsException($msg, 3628491566);
             }
 
             if (!preg_match('#^\w*$#', $name)) {
                 $msg = "The field name should only contain word characters to avoid potential problems.";
-                throw new InvalidOptionsException($msg);
+                throw new InvalidOptionsException($msg, 5097897960);
             }
 
             return $name;
@@ -124,26 +124,24 @@ abstract class AbstractField implements TcaConfigurationInterface
         return $this->options[$name];
     }
 
-    public function modifyCtrl(array &$ctrl, TcaBuilderContext $tcaBuilder)
+    public function modifyCtrl(array &$ctrl, TcaBuilderContext $tcaBuilder): void
     {
         $fieldName = $this->getOption('name');
 
         if ($this->getOption('useAsLabel')) {
             if (!isset($ctrl['label']) || $ctrl['label'] === 'uid') {
                 $ctrl['label'] = $fieldName;
-            } else {
-                if (!isset($ctrl['label_alt'])) {
-                    $ctrl['label_alt'] = $fieldName;
-                } elseif (!str_contains($ctrl['label_alt'], $fieldName)) {
-                    $ctrl['label_alt'] .= ', ' . $fieldName;
-                }
+            } elseif (!isset($ctrl['label_alt'])) {
+                $ctrl['label_alt'] = $fieldName;
+            } elseif (!str_contains($ctrl['label_alt'], (string) $fieldName)) {
+                $ctrl['label_alt'] .= ', ' . $fieldName;
             }
         }
 
         if ($this->getOption('searchField')) {
             if (!isset($ctrl['searchFields'])) {
                 $ctrl['searchFields'] = $fieldName;
-            } elseif (!str_contains($ctrl['searchFields'], $fieldName)) {
+            } elseif (!str_contains($ctrl['searchFields'], (string) $fieldName)) {
                 $ctrl['searchFields'] .= ', ' . $fieldName;
             }
         }
@@ -153,7 +151,7 @@ abstract class AbstractField implements TcaConfigurationInterface
                 $msg = "Only one field can specify the record type for table $tcaBuilder.";
                 $msg .= " Tried using field " . $fieldName . " as type field.";
                 $msg .= " Field " . $ctrl['type'] . " is already defined as type field.";
-                throw new \RuntimeException($msg);
+                throw new \RuntimeException($msg, 3613526212);
             }
 
             $ctrl['type'] = $fieldName;
@@ -198,7 +196,7 @@ abstract class AbstractField implements TcaConfigurationInterface
 
     public function getDbTableDefinitions(TableBuilderContext $tableBuilder): array
     {
-        $name = addslashes($this->getOption('name'));
+        $name = addslashes((string) $this->getOption('name'));
         $definition = [$tableBuilder->getTableName() => ["`$name` " . $this->getOption('dbType')]];
 
         if ($this->getOption('index')) {

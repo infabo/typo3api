@@ -9,7 +9,7 @@ use Typo3Api\Builder\Context\TcaBuilderContext;
 
 class LanguageConfiguration implements TcaConfigurationInterface, DefaultTabInterface
 {
-    public function modifyCtrl(array &$ctrl, TcaBuilderContext $tcaBuilder)
+    public function modifyCtrl(array &$ctrl, TcaBuilderContext $tcaBuilder): void
     {
         $ctrl['languageField'] = 'sys_language_uid';
         $ctrl['translationSource'] = 'l10n_source';
@@ -20,7 +20,7 @@ class LanguageConfiguration implements TcaConfigurationInterface, DefaultTabInte
     public function getColumns(TcaBuilderContext $tcaBuilder): array
     {
         if (!$tcaBuilder instanceof TableBuilderContext) {
-            throw new \LogicException("LanguageConfiguration only possible on database tables");
+            throw new \LogicException("LanguageConfiguration only possible on database tables", 5253613794);
         }
 
         $tableName = $tcaBuilder->getTableName();

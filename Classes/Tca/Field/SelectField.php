@@ -11,6 +11,7 @@ use Typo3Api\Builder\Context\TcaBuilderContext;
 
 class SelectField extends AbstractField
 {
+    #[\Override]
     protected function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
@@ -34,11 +35,11 @@ class SelectField extends AbstractField
             'required' => true, // TODO i somehow want this to be false now since having an empty option is nice
 
             'dbType' => function (Options $options) {
-                $possibleValues = self::getValuesFromItems($options['items']);
+                $possibleValues = $this->getValuesFromItems($options['items']);
                 $defaultValue = addslashes(reset($possibleValues));
 
                 $minimumChars = $options['itemsProcFunc'] ? 30 : 1;
-                $maxChars = max($minimumChars, ...array_map('mb_strlen', $possibleValues));
+                $maxChars = max($minimumChars, ...array_map(mb_strlen(...), $possibleValues));
 
                 if ($maxChars > 191) {
                     // Why 191 characters?
@@ -48,7 +49,7 @@ class SelectField extends AbstractField
                     $msg = "The value in an select shouldn't be longer than 191 characters.";
                     $msg .= " The longest value has $maxChars characters.";
                     $msg .= " If you absolutely need to save longer values, define the dbType manually.";
-                    throw new InvalidOptionsException($msg);
+                    throw new InvalidOptionsException($msg, 2557440189);
                 }
 
                 return "VARCHAR($maxChars) DEFAULT '$defaultValue' NOT NULL";
@@ -82,7 +83,7 @@ class SelectField extends AbstractField
                 // the documentation says these chars are invalid
                 // https://docs.typo3.org/typo3cms/TCAReference/ColumnsConfig/Type/Select.html#items
                 if (preg_match('/[|,;]/', $item[1] ?? $item['value'])) {
-                    throw new InvalidOptionsException("The value in an select must not contain the chars '|,;'.");
+                    throw new InvalidOptionsException("The value in an select must not contain the chars '|,;'.", 9362047533);
                 }
             }
 
@@ -90,7 +91,7 @@ class SelectField extends AbstractField
         });
     }
 
-    private static function getValuesFromItems(array $items): array
+    private function getValuesFromItems(array $items): array
     {
         $values = [];
 
@@ -106,7 +107,7 @@ class SelectField extends AbstractField
             $values[] = $item['value'];
         }
 
-        if (empty($values)) {
+        if ($values === []) {
             $values[] = '';
         }
 

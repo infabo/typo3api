@@ -9,7 +9,7 @@ use Typo3Api\Builder\Context\TcaBuilderContext;
 
 class SortingConfiguration implements TcaConfigurationInterface
 {
-    public function modifyCtrl(array &$ctrl, TcaBuilderContext $tcaBuilder)
+    public function modifyCtrl(array &$ctrl, TcaBuilderContext $tcaBuilder): void
     {
         $ctrl['sortby'] = 'sorting';
     }

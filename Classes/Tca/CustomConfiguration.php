@@ -52,7 +52,7 @@ class CustomConfiguration implements TcaConfigurationInterface
         return $this->options[$option];
     }
 
-    public function modifyCtrl(array &$ctrl, TcaBuilderContext $tcaBuilder)
+    public function modifyCtrl(array &$ctrl, TcaBuilderContext $tcaBuilder): void
     {
         foreach ($this->getOption('ctrl') as $key => $value) {
             $ctrl[$key] = $value;

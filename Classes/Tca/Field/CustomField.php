@@ -24,6 +24,7 @@ use Typo3Api\Builder\Context\TcaBuilderContext;
  */
 class CustomField extends AbstractField
 {
+    #[\Override]
     protected function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
