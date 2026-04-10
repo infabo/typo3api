@@ -12,6 +12,8 @@ return function (ContainerConfigurator $configurator): void {
 
     $services->load('Typo3Api\\', '../Classes/*');
 
+    $services->set(\Typo3Api\Hook\CacheTagHook::class)->public();
+
     $services->set(\Typo3Api\EventListener\SqlSchemaListener::class)
         ->tag('event.listener', [
             'identifier' => 'typo3api-builder/sql-schema',
