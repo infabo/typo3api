@@ -23,46 +23,7 @@ class LanguageConfiguration implements TcaConfigurationInterface, DefaultTabInte
             throw new \LogicException("LanguageConfiguration only possible on database tables", 5253613794);
         }
 
-        $tableName = $tcaBuilder->getTableName();
-        return [
-            'sys_language_uid' => [
-                'exclude' => false,
-                'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
-                'config' => [
-                    'type' => 'language'
-                ]
-            ],
-            'l10n_source' => [
-                'config' => [
-                    'type' => 'passthrough'
-                ]
-            ],
-            'l18n_diffsource' => [
-                'config' => [
-                    'type' => 'passthrough',
-                    'default' => ''
-                ]
-            ],
-            'l18n_parent' => [
-                'displayCond' => 'FIELD:sys_language_uid:>:0',
-                'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.l18n_parent',
-                'config' => [
-                    'type' => 'select',
-                    'renderType' => 'selectSingle',
-                    'items' => [
-                        ['label' => '', 'value' => 0]
-                    ],
-                    'foreign_table' => $tableName,
-                    'foreign_table_where' => "AND $tableName.pid=###CURRENT_PID### AND $tableName.sys_language_uid IN (-1,0)",
-                    'default' => 0
-                ]
-            ],
-            // TODO, wrong localization fieldnames, what is l18n supposed to mean?
-            // l10n = localization
-            // i18n = internationalization
-            // l18n = ?
-            // it should be l10n like with the source field but that would be a breaking change for a future release
-        ];
+        return [];
     }
 
     public function getPalettes(TcaBuilderContext $tcaBuilder): array
