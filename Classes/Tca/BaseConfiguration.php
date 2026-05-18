@@ -22,6 +22,7 @@ class BaseConfiguration implements TcaConfigurationInterface
         $ctrl['crdate'] = 'crdate';
         $ctrl['origUid'] = 'origUid';
         $ctrl['label'] = 'uid';
+        $ctrl['iconfile'] = 'EXT:core/Resources/Public/Icons/T3Icons/svgs/mimetypes/mimetypes-open-document-database.svg';
     }
 
     public function getColumns(TcaBuilderContext $tcaBuilder): array
