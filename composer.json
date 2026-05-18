@@ -1,6 +1,7 @@
 {
 	"name": "infabo/typo3api",
 	"type": "typo3-cms-extension",
+	"title": "API for easier TYPO3 TCA handling",
 	"license": "MIT",
 	"keywords": [
 		"TYPO3",
