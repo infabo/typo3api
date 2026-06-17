@@ -24,7 +24,13 @@ class EnableColumnsConfiguration implements TcaConfigurationInterface, DefaultTa
 
     public function getColumns(TcaBuilderContext $tcaBuilder): array
     {
-        return [];
+        return [
+            'hidden' => $GLOBALS['TCA']['tt_content']['columns']['hidden'],
+            'starttime' => $GLOBALS['TCA']['tt_content']['columns']['starttime'],
+            'endtime' => $GLOBALS['TCA']['tt_content']['columns']['endtime'],
+            'fe_group' => $GLOBALS['TCA']['tt_content']['columns']['fe_group'],
+            'editlock' => $GLOBALS['TCA']['tt_content']['columns']['editlock'],
+        ];
     }
 
     public function getPalettes(TcaBuilderContext $tcaBuilder): array
