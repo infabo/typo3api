@@ -111,7 +111,7 @@ class InlineRelationField extends AbstractField
         $sortby = @$foreignTableDefinition['ctrl']['sortby'] ?: @$foreignTableDefinition['ctrl']['_sortby'];
         $canBeSorted = (bool)$sortby;
         $canLocalize = (bool)@$foreignTableDefinition['ctrl']['languageField'];
-        $canHide = (bool)@$foreignTableDefinition['columns']['hidden'];
+        $canHide = (bool)@$foreignTableDefinition['ctrl']['enablecolumns']['disabled'];
 
         return [
             'type' => 'inline',
